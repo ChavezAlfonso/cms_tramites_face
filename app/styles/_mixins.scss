@@ -1,0 +1,108 @@
+@mixin fontsize($size:1.6, $line: $size * 1.2){
+    font-size:   ($size * 10) + px;
+    line-height: ($line * 10) + px;
+    font-size:   $size + rem;
+    line-height: $line + rem;
+}
+
+@mixin alpha($value){
+  $IEValue: $value*100;
+  opacity: $value;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="+$IEValue+")";
+  filter: alpha(opacity=$IEValue);
+}
+
+@mixin box-shadow($arguments...){
+    -moz-box-shadow: $arguments;
+    -webkit-box-shadow: $arguments;
+    box-shadow: $arguments;
+}
+
+@mixin transition($arguments...) {
+    -webkit-transition: $arguments;            
+       -moz-transition: $arguments; 
+         -o-transition: $arguments; 
+        -ms-transition: $arguments;
+            transition: $arguments;
+}
+
+@mixin translate($x, $y) {
+  -webkit-transform: translate($x, $y);
+      -ms-transform: translate($x, $y); 
+       -o-transform: translate($x, $y);
+          transform: translate($x, $y);
+}
+
+@mixin scale($arguments) {
+  -webkit-transform: scale($arguments);
+      -ms-transform: scale($arguments); 
+          transform: scale($arguments);
+}
+
+@mixin rotate($degs...) {
+  -webkit-transform: rotate($degs);
+      -ms-transform: rotate($degs); 
+          transform: rotate($degs);
+}
+
+@mixin animation($arguments...) {
+    -webkit-animation: $arguments;
+    animation: $arguments;
+    -o-animation:$arguments;
+    -moz-animation:$arguments;
+    -ms-animation:$arguments;
+}
+
+@mixin animation-delay($delay...){
+   -webkit-animation-delay: $delay;
+    -moz-animation-delay: $delay;
+    -o-animation-delay: $delay;
+    -ms-animation-delay: $delay;
+    animation-delay: $delay; 
+}
+
+@mixin background-size($arguments...){
+    -webkit-background-size: $arguments;
+    -moz-background-size: $arguments;
+    -o-background-size: $arguments;
+    background-size: $arguments;
+}
+
+@mixin columns($arguments){
+    -webkit-columns: $arguments;
+    -moz-columns: $arguments;
+    -ms-columns: $arguments;
+    -o-columns: $arguments;
+    columns: $arguments;
+}
+
+@mixin box-sizing($arguments...){
+    box-sizing:$arguments;
+    -moz-box-sizing:$arguments;
+    -webkit-box-sizing:$arguments;
+    -o-box-sizing:$arguments;
+}
+
+@mixin border-top-radius($radius) {
+  border-top-right-radius: $radius;
+   border-top-left-radius: $radius;
+}
+@mixin border-right-radius($radius) {
+  border-bottom-right-radius: $radius;
+     border-top-right-radius: $radius;
+}
+@mixin border-bottom-radius($radius) {
+  border-bottom-right-radius: $radius;
+   border-bottom-left-radius: $radius;
+}
+@mixin border-left-radius($radius) {
+  border-bottom-left-radius: $radius;
+     border-top-left-radius: $radius;
+}
+
+
+@mixin block-shadow($shadow: 0px 2px 0px 0px rgba(50, 50, 50, 0.2)){
+    -webkit-box-shadow: $shadow;
+    -moz-box-shadow:    $shadow;
+    box-shadow:         $shadow;
+}

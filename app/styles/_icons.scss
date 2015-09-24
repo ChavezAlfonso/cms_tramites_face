@@ -1,0 +1,24 @@
+//==iconos
+
+.green-check{
+    color:$green; background: $white;  border-radius:50%; width: 30px; height: 30px; display: inline-block; position:relative; top:3px;  @include box-shadow(inset 1px 1px 1px #999);
+    .fa{position: absolute;  top: 50%; left: 50%; margin-left: -7px; margin-top: -9px;}
+}
+
+//== iconos de sprite
+.icon-sidebar{
+    background-image:url(../img/sprite-icons.png); background-repeat: no-repeat; display:block; margin:0 auto 10px;
+    &.desktop{width:32px; height: 31px; }
+    &.content{width:31px; height: 31px; background-position: -32px 0 }
+    &.modules{width:26px; height: 31px; background-position: -63px 0}
+    &.nav{width:25px; height: 19px; background-position: -91px 0}
+    &.lockdown{width:25px; height: 31px; background-position: -118px 0}
+    &.reports{width:29px; height: 31px; background-position: -144px 0}
+    &.setup{width:31px; height: 31px; background-position: -175px 0}
+    
+}
+
+.fa-close{
+    &:before{content:"\f105"}
+    &:after{content:"\f104"; margin-left:-5px}    
+}

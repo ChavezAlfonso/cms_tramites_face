@@ -1,0 +1,91 @@
+//== thumbnails
+
+.thumbnail{
+    border: none; background: transparent; position: relative; border-radius: 0; margin-bottom: 10px;
+    & img{
+       border: 1px solid $gray-light; 
+    }
+    input[type='checkbox']{
+        position: absolute; left: 10px; top: 10px;
+    }
+}
+
+.add-thumbnail {
+  border: 1px dashed lighten($gray-light, 25%);  background-color: transparent;
+  &:hover { 
+    &:before{color:darken($gray-light, 20%) }
+  }
+}
+
+    .thumbnail{
+        display: inline-block; background: $gray-ultralight; border: 1px solid lighten($gray-light, 25%); height: 160px; width: 160px; padding: 0; margin-right: 10px; position:relative;
+        &:before{ content:"\f03e"; font-family: FontAwesome; display:block; position:absolute; left:50%; top:50%; font-size:40px; margin-top: -25px; margin-left: -25px; color:lighten($gray-light, 20%)}
+        img{border:none;}
+        .img-btn{
+            position: absolute; top:5px; right:5px; background: $gray-ultralight; padding-left:10px; padding-right: 10px;
+            &:hover{background: $gray-lighter;}
+        }
+        .starred{color: $yellow; bottom:5px; top:inherit;}
+    }
+    .add-thumbnail {
+        height: 160px; width: 160px;  display: inline-block; padding: 0; margin-right: 10px; position:relative; border: 2px dashed lighten($gray-light, 25%);  background-color: transparent;
+         &:before{ content:"\f067"; margin-left: -17px; @include transition(all .2s ease-in-out);}
+         &:hover { 
+            border-color:darken($gray-light, 20%);
+            &:before{color:darken($gray-light, 20%) }
+        }
+    }
+    
+
+
+/* -- seleccionar archivos subida -- */
+.drag-files {
+    border: 2px solid lighten($gray-light, 25%); padding:10px;
+    .upload-icon {
+        font-size: 58px; margin-right: 20px;
+    }
+    .btn-default {
+        padding-top:2px; padding-bottom: 2px;
+    }
+}
+
+.upload-wrapper{
+    min-height: 350px; border: 2px dashed lighten($gray-light, 25%); color:$gray-light;  display:flex; align-items: center; flex-flow: row wrap ; justify-content: center; text-align: center; padding-top:30px; padding-bottom: 30px;
+}
+
+.file-upload-icon{
+    .fa{color:$gray-light; font-size: 50px; border: 9px dashed $gray-light; border-radius: 9px; padding: 10px; }
+}
+
+.info-gallery {
+    width: 100%; @include clearfix();
+    tr { border: 1px solid darken($gray-lighter, 10%); margin-bottom: 5px; display:block; padding:10px;}
+    td:nth-child(even) { font-weight:bold;}
+}
+
+.gallery-wrapper {
+    @include clearfix(); @include transition( all 0.2 ease);
+    
+    .gallery{ 
+        float: none; width: 100%; overflow: hidden; max-height: 510px; overflow-y: auto;@include transition( all 0.2 ease);
+    }
+
+    .highlight { 
+        display:block; position:relative; width: 0%; float:right; margin-top: 0; background-color: lighten($gray-lighter, 2%);@include transition( all 0.2 ease); 
+        .close {
+            display: block; position:absolute; top:10px; right:10px; width:30px; height:30px; background-color: darken($gray-lighter, 30%)
+        }
+    }
+
+    &.active {
+       .gallery{
+        float: left; width: 60%; 
+        }
+        .highlight {
+            display: block; width: 40%; 
+        } 
+    }
+    
+}
+
+

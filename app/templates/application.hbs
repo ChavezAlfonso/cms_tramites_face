@@ -1,0 +1,41 @@
+{{#if isLogged}}
+<section class="sidebar">
+<div class="logo">{{#link-to "home"}}<img src="assets/images/logo-gobmx.png" alt="gob.mx" width="76" height="22">{{/link-to}}</div>
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+  <span class="sr-only">Toggle navigation</span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</button>
+<div class="navbar-collapse collapse">
+  <ul class="nav nav-sidebar">
+    <li><a {{action 'goToHome'}}><i class="icon-desktop"></i>Escritorio</a></li>
+    <li><a {{action 'goToTramites'}}><i class="icon-content"></i>Trámites</a></li>
+    <li><a {{action 'goToCategories'}}><i class="icon-nav"></i>Categorías</a></li>
+    <li><a {{action 'goToUsers'}}><i class="icon-users"></i>Usuarios</a></li>
+    <li><a {{action 'goToSecretarias'}}><i class="icon-nav"></i>Dependencias</a></li>
+  </ul>
+</div>
+</section>
+{{#view 'userpanel'}}
+<div class="user-panel" style="position: relative !important; float: right;">
+  <div {{action 'togglePanel' target="view"}} class="nav navbar-nav user-header">
+    <a class="dropdown-toggle user-dropdown" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" data-original-
+    title title>
+    <div class="user-atts">
+      <div class="username">{{controller.user.name}}</div>
+      <div class="userrole">{{controller.user.role}}</div>
+    </div>
+    <div class="user-avatar"></div>
+    <i class="fa fa-angle-down fa-lg"></i>
+  </a>
+  <ul class="dropdown-menu">
+    <li><a {{action 'logout'}}><i class="fa fa-sign-out"></i> Cerrar sesión</a></li>
+  </ul>
+  </div>
+</div>
+{{/view}}
+{{/if}}
+<div style="height: 99vh; margin: 0; padding: 0;">
+{{outlet}}
+</div>

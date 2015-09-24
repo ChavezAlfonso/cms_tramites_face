@@ -1,0 +1,8 @@
+//== tags
+
+.tag{
+    position: relative;  display: inline-block; text-transform: uppercase; line-height: 1; color: $black; text-align: center; margin-bottom: 5px;
+    white-space: nowrap; vertical-align: baseline; border-radius: .25em; background: $gray-lighter; padding:.8em 2em .8em .3em ; 
+    &>.close{position: absolute; right:6px; top:.4em; float:none; color:$black; @include alpha(.5)}
+    .add-tag{}
+}

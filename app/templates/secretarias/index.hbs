@@ -1,0 +1,129 @@
+<div class="main-wrapper">
+    <header class=" topHeader">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <h2> <i class="fa fa-angle-right"></i> Listado de Dependencias</h2>
+            </div>
+        </div>
+    </header>
+    <main class="wrapper categoria" role="main">
+        <div class="clearfix bottom-buffer">
+            <div class="search-query pull-right">
+              {{input type="text" value=filter class="form-control search-small" placeholder="Buscar Dependencias..." }}
+                <button class="search-submit" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+            <button {{action 'enableNewDependenceForm'}} class="btn btn-simple btn-lg pull-right">Crear Dependencia</button>
+        </div>
+      <div class="relative">
+        <div class="all-categories">
+          {{#if txCatError}}
+              <section class="clearfix">
+                  <div class="alert alert-danger col-md-5" role="alert" style="margin: 14px auto; display: table;">
+                      <span class="fa  fa-exclamation-circle"></span>
+                      <span class="sr-only">Error:</span>
+                      <span style="padding-left:5px;">{{txCatMessageError}}</span>
+                  </div>
+              </section>
+          {{/if}}
+          {{#if newDependenceEvent }}
+              <!-- bloque para crear una nueva categoría -->
+              <section class="create-category">
+                  <h4>Agregar una nueva Dependencia.</h4>
+                  <div class="well">
+                      <div class="row">
+                          <div class="col-sm-12 bottom-buffer">
+                            {{input value=newDependenceItem.name class="form-control value-add" placeholder="Nombre Dependencia"}}
+                          </div>
+                      </div>
+                      <div class="row">
+                          <div class="col-sm-6">
+                              <h4>Siglas</h4>
+                            {{textarea value=newDependenceItem.siglas class="form-control text-add" rows="1" placeholder="Ingresar SIGLAS"}}
+                          </div>
+                          <div class="col-sm-6">
+                              <div class="top-buffer">
+                                  <button {{action 'cancelNewDependenceForm'}} type="button" id="cancelCategory" class="btn btn-action add-cancel">Cancelar</button>
+                                  <button {{action 'saveNewDependenceForm'}} {{bind-attr disabled=disableDependenciaSave}} type="button" id="addCategory" class="btn btn-action publish">Agregar Dependencia</button>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+              <!-- end bloque para crear una nueva categoría -->
+          {{/if}}
+          {{#if txCatEvent}}
+              <section class="clearfix">
+                  <div class="alert alert-success col-md-5" role="alert" style="margin: 14px auto; display: table;">
+                      <span class="fa fa-check"></span>
+                      <span class="sr-only">Éxito:</span>
+                      <span style="padding-left:5px;">{{txCatMessage}}</span>
+                  </div>
+              </section>
+          {{/if}}
+          <table class="table table-hover table-striped table-order">
+            <colgroup>
+                <col class="col-xs-4">
+                <col class="col-xs-4">
+                <col class="col-xs-4">
+            </colgroup>
+            <thead>
+              <tr>
+                  <th>Nombre de la Dependencia</th>
+                  <th>Siglas</th>
+                  <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each dependence in model itemController="secretarias.itemSecretaria" }}
+                {{#if dependence.txInnerCatEvent}}
+                    <tr>
+                        <td colspan ="3">
+                            <section class="clearfix">
+                                <div class="alert alert-success col-md-4" role="alert" style="margin: 14px auto; display: table;">
+                                    <span class="fa fa-check"></span>
+                                    <span class="sr-only">Éxito:</span>
+                                    <span style="padding-left:5px;">{{dependence.txInnerMessage}}</span>
+                                </div>
+                            </section>
+                        </td>
+                    </tr>
+                {{/if}}
+                <tr>
+                    <td>
+                        <div class="checkbox">
+                            <label><input type="checkbox">{{dependence.name}}</label>
+                        </div>
+                    </td>
+                    <td>{{dependence.siglas}}</td>
+                    <td>
+                        <!--button {{action 'deleteDependence'}} class="btn btn-default settings delete-row" type="button"><i class="fa fa-trash"></i></button-->
+                        <button {{action 'editDependenceForm'}} class="btn btn-default settings right-mini-space" type="button"><i class="fa fa-cog"></i></button>
+                    </td>
+                </tr>
+                {{#if dependence.editDependenceEvent }}
+                  <!-- editor de categoría -->
+                  <tr class="form-group">
+                    <td>
+                      {{input value=dependence.name class="form-control2 edit-name" placeholder="Nombre Dependencia"}}
+                    </td>
+                    <td>
+                      {{input value=dependence.siglas class="form-control2 edit-siglas" placeholder="Ingresar siglas"}}
+                    </td>
+                    <td>
+                      <button {{action 'cancelDependenceItem'}} type="button" class="btn btn-simple edit-cancel-btn">Cancelar edición</button>
+                      <button {{action 'saveDependenceItem'}} {{bind-attr disabled=dependence.disableDependenceSave}} type="button" class="btn btn-simple pull-right edit-save-btn"> Guardar cambios</button>
+                    </td>
+                  </tr>
+                  <!-- end editor de categoría -->
+                {{/if}}
+                {{else}}
+                  <tr>
+                    <td colspan="10" style="text-align:center;">No hay Dependencias disponibles.</td>
+                  </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+</div>

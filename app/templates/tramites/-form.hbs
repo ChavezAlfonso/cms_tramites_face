@@ -1,0 +1,470 @@
+{{#view 'tramites.new'}}
+<!-- panel información básica -->
+<div class="panel panel-white">
+<header class="panel-heading">
+  Información básica del trámite
+ </header>
+ <section class="panel-body">
+  <div class="container-fluid clearfix">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="label-title" for="stepName">Nombre del trámite</label>
+                {{input valueBinding="model.name" class="form-control" placeholder="Introduce el nombre del trámite"}}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="" class="label-title">Homoclave</label>
+                {{input value=model.cntseId class="form-control" }}
+            </div>
+        </div>
+        <div class="col-sm-6 ">
+            <div class="form-group">
+                <label class="label-title">Secretaría / Dependencia</label>
+                {{select-2 content=secretarias value=selectedSecretaria placeholder="Seleccionar Dependencia" optionDescriptionPath='siglas' optionLabelPath="name" allowClear=true}}
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- end panel información básica -->
+{{#if isSaved}}
+
+  <!-- panel enlace botón -->
+  <div class="panel panel-white">
+      <header class="panel-heading">
+          Descripción del trámite
+      </header>
+      <section class="panel-body">
+        {{ medium-content-editable value=model.description options='{"disablePlaceholders":false,"placeholder":"Escribir Descripción","buttons": ["bold","italic","anchor","quote","strikethrough","unorderedlist","orderedlist","justifyLeft","justifyFull","justifyCenter","justifyRight"]}' }}
+      </section>
+  </div>
+  <!-- end panel enlace botón -->
+
+  <!-- panel categorias links -->
+  <div id="requiredPanel" class="panel panel-white panel-steps">
+      <header class="panel-heading">
+          Agregar Subcategoría
+      </header>
+      <section class="panel-body sortable">
+        {{#each subcategoryItem in selectedSubcategories }}
+          <div class="module">
+            <div class="wrapper">
+              <div class="twentyfive text-left" style="word-wrap:break-word;">
+                <div style="float:left;width:45px;"><span2></span2></div>
+                <div class="text-edit" style="float:left;padding-top:5px;">{{subcategoryItem.category_name}}</div>
+              </div>
+              <div class="fifty text-left" style="padding-top:5px;">
+                {{subcategoryItem.name}}
+              </div>
+              <div class="twentyfive clearfix relative">
+                <div class="button-group pull-right" >
+                  <button {{action 'deleteSubcategory' subcategoryItem}} class="btn btn-simple-icon btn-edit-remove"><i class="fa fa-times"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+          <button {{action 'enableSubcategories'}} type="button" class="btn btn-block btn-add"> + Agregar Subcategoría</button>
+        {{#if addSubcategoryEvent }}
+          <div class="add-doc">
+            <div class="row">
+              <div class="col-sm-6">
+                {{#if guardaSubcategoria}}
+                    <section class="clearfix ">
+                        <div class="content">
+                            <div class="content alert alert-danger col-sm-8" role="alert" style="margin: 14px auto; display: table;">
+                                <span class="fa fa-cross-cricle"></span>
+                                <span class="sr-only">Error:</span>
+                                <span style="padding-left:5px;">{{mensajeSubcategoria}}</span>
+                            </div>
+                        </div>
+                    </section>
+                {{/if}}
+                <h4>Categoría</h4>
+                {{select-2 content=categorias value=selectedCategory placeholder="Seleccionar Categoría" optionDescriptionPath='none' optionLabelPath="name" allowClear=true}}
+                <h4>Orden</h4>
+                {{number-input type="text" value=selectedOrder placeholder="0"}}
+                <i class="fa fa-arrow-circle-up" {{ action 'changeOrder' true  }}></i>
+                <i class="fa fa-arrow-circle-down" {{ action 'changeOrder' false }}></i>
+              </div>
+              <div class="col-sm-6">
+                <h4>SubCategoría</h4>
+                {{select-2 content=subcategorias value=selectedSubcategory placeholder="Seleccionar Subcategoría" optionLabelPath="name" optionDescriptionPath='none' allowClear=true}}
+                <div class="top-buffer">
+                  <button {{action 'cancelSubcategories'}} type="button" class="btn btn-action add-cancel"> Cancelar</button>
+                  <button {{action 'saveSubcategories'}} type="button" class="btn btn-action publish"> Agregar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+      </section>
+  </div>
+  <!-- end panel categorías -->
+
+  <!-- panel action links -->
+  <div id="requiredPanel" class="panel panel-white panel-steps">
+    <header class="panel-heading">
+      Enlace para botón de acción
+    </header>
+    <section class="panel-body sortable">
+      {{#each actionTypeItem in model.actionTypes itemController="tramites.itemAction"}}
+        <div class="module">
+          <div class="wrapper">
+            {{#if actionTypeItem.isEditing}}
+              <div style="width:45px;float:left;display:block;"><span2></span2></div>
+              <div class="fifty">
+                <div style="float:left;display:block;width:100%;">
+                  {{input value=actionTypeItem.link class="form-control" placeholder="URL o Email"}}
+                  {{textarea value=actionTypeItem.description class="form-control" rows="2" columns="5" placeholder="Ingresar Descripción"}}
+                </div>
+              </div>
+              <div class="text-center" style="width:20%;float:left;display:block;">
+                {{view "select" class="form-select" content=types value=actionTypeItem.tipo }}
+              </div>
+              <div class="twentyfive clearfix relative vertical-buffer">
+                  <div class="button-edit-group" >
+                    <button {{action "deleteActionType" }} type="button" class="btn erase">Borrar</button>
+                    <button {{action "cancelEditActionType"}} type="button" class="btn cancel">Cancelar</button>
+                    <button {{action "saveActionType"}} {{bind-attr disabled=actionTypeItem.isEditDisabled}} type="button" class="btn save">Guardar</button>
+                  </div>
+              </div>
+            {{else}}
+              <div class="fifty">
+                <div style="width:45px;float:left;display:block;"><span2></span2></div>
+                <div style="padding-top:5px;float:left;display:block;word-wrap:break-word;">{{actionTypeItem.link}}</div>
+              </div>
+              <div class="twentyfive text-center">
+                {{actionTypeItem.tipo}}
+              </div>
+              <div class="twentyfive clearfix relative">
+                <div class="button-group pull-right" >
+                  <button {{action 'editActionType'}} {{bind-attr disabled=addActionTypeEvent}} class="btn btn-simple edit-doc-btn"> Editar </button>
+                </div>
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      {{/each}}
+      <button {{action 'enableActionType'}} type="button" class="btn btn-block btn-add"> + Agregar Nuevo Link</button>
+      {{#if addActionTypeEvent }}
+        <div class="add-doc">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4>Enlace para botón de acción</h4>
+              {{input value=newActionType.link class="form-control" placeholder="URL o Email"}}
+              {{textarea value=newActionType.description class="textarea form-control" rows="2" columns="5" placeholder="Ingresar Descripción"}}
+            </div>
+            <div class="col-sm-6">
+              <h4>Selecciona el tipo de link</h4>
+              {{view "select" class="form-control" content=types value=newActionType.tipo }}
+              <div class="top-buffer">
+                <button {{action 'cancelActionType'}} type="button" class="btn btn-action add-cancel"> Cancelar</button>
+                <button {{action 'saveActionType'}} {{bind-attr disabled=controller.isActionTypeLinkDisabled}} type="button" class="btn btn-action publish"> Agregar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+    </section>
+  </div>
+  <!-- end panel action links -->
+
+  <!-- panel documentos necesarios -->
+  <div id="requiredPanel" class="panel panel-white panel-steps">
+    <header class="panel-heading">
+      <section class="panel-body sortable">
+        <div class="content sortable">
+          <div class="row">
+              <header class="panel-heading">
+                  Documentos necesarios
+              </header>
+          </div>
+          <div class="row">
+            <ul class="nav nav-pills col-md-8" >
+              <li>
+                <button {{action 'editSelectedGroup'}} class="btn btn-default settings pull-left " type="button">
+                    <i class="fa fa-cog"></i>
+                </button>
+              </li>
+              <li>
+                <button {{action 'addGroupDocument'}} class="btn btn-default settings pull-left " type="button">
+                    <i class="fa fa-plus"></i>
+                </button>
+              </li>
+                {{#each dgItem in model.documentsGroup itemController="tramites.itemDocumentGroup"}}
+                  <li {{bind-Attr id= "dgItem.id"}} {{action 'showDocumentsByGroup1' dgItem}}  >
+                    <a data-toggle="pill" {{action 'showDocumentsByGroup' dgItem}} >{{{dgItem.title}}}</a>
+                  </li>
+                {{/each}}
+            </ul>
+          </div>
+        </div>
+      </section>
+    </header>
+    {{#if addDocumentGroupEvent }}
+        <div class="add-doc">
+            <div class="row">
+                <div class="col-sm-6">
+                  <h4>Nombre del grupo</h4>
+                  {{input value=newDocumentGroup.title class="form-control text-add" rows="3" placeholder="Ingresa el nombre del grupo"}}
+                  <h3>Descripción del Grupo</h3>
+                  <div style="border-sytle: solid; border-widht: 1px; background-color: white" >
+                    {{ medium-content-editable value=newDocumentGroup.description options='{"disablePlaceholders":false,"placeholder":"Descripción","buttons":["bold","italic","anchor","quote","strikethrough","unorderedlist","orderedlist","justifyLeft","justifyFull","justifyCenter","justifyRight"]}' }}
+                  </div>
+                  <h3>Notas del Grupo</h3>
+                  <div style="border-sytle: solid; border-widht: 1px; background-color: white" >
+                    {{ medium-content-editable value=newDocumentGroup.note options='{"disablePlaceholders":false,"placeholder":"Descripción","buttons":["bold","italic","anchor","quote","strikethrough","unorderedlist","orderedlist","justifyLeft","justifyFull","justifyCenter","justifyRight"]}' }}
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="button-edit-group vertical-buffer ">
+                    <button {{action "deleteDocumentGroupItem" }} type="button" class="btn erase">Borrar</button>
+                    <button {{action 'cancelDocumentsGroup'}} type="button" class="btn btn-action add-cancel"> Cancelar</button>
+                    <button {{action 'saveDocumentGroupItem'}} type="button" class="btn btn-action publish"> Agregar</button>
+                    {{#if eliminaGrupoEvent}}
+                        <section class="clearfix ">
+                            <div class="content">
+                                <div class="content alert alert-danger col-sm-8" role="alert" style="margin: 14px auto; display: table;">
+                                    <span class="fa fa-cross-cricle"></span>
+                                    <span class="sr-only">Error:</span>
+                                    <span style="padding-left:5px;">{{estatusEliminaGrupo}}</span>
+                                </div>
+                            </div>
+                        </section>
+                    {{/if}}
+                  </div>
+                </div>
+            </div>
+        </div>
+    {{/if}}
+    {{#if addDocumentsBlock }}
+      <section class="panel-body sortable" >
+        {{#each documentItem in selectedGroup.documents itemController="tramites.itemDocument" }}
+           <div class="module">
+            <div class="wrapper">
+              {{#if documentItem.isEditing }}
+                <div style="width:45px;display:block;float:left;"><span2></span2></div>
+                <div class="fifty">
+                  <div style="padding-top:5px;width:calc(100% - 10px);">
+                    {{ medium-content-editable value=documentItem.description placeholder="Descripción" class="textarea form-control" options='{"disablePlaceholders":false,"placeholder":"Descripción","buttons":["bold","italic","anchor","quote","strikethrough","unorderedlist","orderedlist","justifyLeft","justifyFull","justifyCenter","justifyRight"]}' }}
+                    {{input value=documentItem.linkformat class="form-control textarea" placeholder="http://"}}
+                  </div>
+                </div>
+                <div style="float:left;width:20%;"class="text-center">
+                  {{view "select" value=documentItem.copies class="form-edit" content=copiesRange}}
+                  <label class="right-margin "> Copias </label>
+                  <label class="checkbox-inline">
+                    {{input type="checkbox" class="form-edit" checked=documentItem.original}} Original
+                  </label>
+                </div>
+                <div class="twentyfive clearfix relative vertical-buffer">
+                    <div class="button-edit-group vertical-buffer">
+                        <button {{action "deleteDocument" documentItem}} type="button" class="btn erase">Borrar</button>
+                        <button {{action "cancelEditDocument"}} type="button" class="btn cancel">Cancelar</button>
+                        <button {{action "saveDocument"}} type="button" class="btn save">Guardar</button>
+                    </div>
+                </div>
+              {{else}}
+                <div class="fifty text-edit">
+                  <div style="float:left;width:45px;"><span2></span2></div>
+                  <div style="float:left;padding-top:5px;">{{{documentItem.description}}}</div>
+                </div>
+                <div class="twentyfive text-center">
+                  {{documentItem.copies}}
+                  <label for="" class="right-margin "> Copias </label>
+                  <label class="checkbox-inline">
+                    {{input type="checkbox" disabled="true" class="form-edit" checked=documentItem.original}}
+                      Original
+                  </label>
+                </div>
+                <div class="twentyfive clearfix relative">
+                  <div class="button-group pull-right" >
+                    <button {{action 'moveDown'}} {{bind-attr disabled=addDocumentEvent}} class="btn btn-simple-icon btn-edit-down"><i class="fa fa-caret-down"></i></button>
+                    <button {{action 'moveUp'}} {{bind-attr disabled=addDocumentEvent}} class="btn btn-simple-icon btn-edit-up"><i class="fa fa-caret-up"></i></button>
+                    <button {{action 'editDocument'}} {{bind-attr disabled=addDocumentEvent}} class="btn btn-simple edit-doc-btn"> Editar </button>
+                  </div>
+                </div>
+              {{/if}}
+            </div>
+          </div>
+        {{/each}}
+        <button {{action 'enableDocuments'}} type="button" class="btn btn-block btn-add"> + Agregar Nuevo Documento</button>
+        {{#if addDocumentEvent }}
+          <div class="add-doc">
+            <div class="row">
+              <div class="col-sm-6">
+                <h4>Ingresar documento necesario</h4>
+                <div style="border-sytle: solid; border-widht: 1px; background-color: white" >
+                  {{ medium-content-editable value=newDocument.description placeholder="Ingresa Documento necesario" options='{"disablePlaceholders":false,"placeholder":"Ingresa Documento necesario","buttons":["bold","italic","anchor","quote","strikethrough","unorderedlist","orderedlist","justifyLeft","justifyFull","justifyCenter","justifyRight"]}' }}
+                </div>
+                {{input value=newDocument.linkformat class="form-control" placeholder="http://"}}
+              </div>
+              <div class="col-sm-6">
+                <h4>Valor requerido de documento </h4>
+                <div class="vertical-buffer">
+                  {{view "select" class="select-add" content=copiesRange value=newDocument.copies}}
+                  <label class="right-margin"> Copias </label>
+                  <div class="checkbox-inline">
+                    <label>
+                      {{input type="checkbox" class="checkbox-original-add" checked=newDocument.original}}
+                      Original
+                    </label>
+                  </div>
+                </div>
+                <div class="top-buffer">
+                  <button {{action 'cancelDocuments'}} type="button" class="btn btn-action add-cancel"> Cancelar</button>
+                  <button {{action 'saveDocumentItem'}} type="button" class="btn btn-action publish"> Agregar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/if}}
+      </section>
+    {{/if}}
+  </div>
+  <!-- end panel documentos necesarios -->
+
+  <!-- panel costo de tramites -->
+  <div id="costsPanel" class="panel panel-white panel-steps ">
+    <header class="panel-heading">
+      Costo de trámites
+    </header>
+    <section class="panel-body sortable">
+      {{#each costo in model.costs itemController='tramites.itemCost'}}
+        <div class="module">
+          <div class="wrapper">
+            {{#if costo.isEditing}}
+              <div style="width:45px;float:left;display:block;"><span></span></div>
+              <div style="width:45%;float:left;display:block;">
+                <div style="border-sytle: solid; border-widht: 1px; background-color: white" >
+                  {{medium-content-editable value=costo.description placeholder="Ingresa el concepto" options='{"disablePlaceholders":false,"placeholder":"costo.description","buttons":["bold","italic","anchor","quote","strikethrough","unorderedlist","orderedlist","justifyLeft","justifyFull","justifyCenter","justifyRight"]}' }}
+                </div>
+              </div>
+              <div class="twentyfive text-center">
+                <div style="width:100%;font-size:14px;">
+                {{#if costo.cfree}}
+                  Gratuito
+                {{else}}
+                  <span>$ {{number-input type="text" class="form-control3" valueBinding="costo.amount" placeholder="000.00"}}</span>
+                  {{view 'select' content=divisas value=costo.divisa}}
+                {{/if}}
+                </div>
+              </div>
+              <div class="twentyfive clearfix relative">
+                <div class="button-edit-group vertical-buffer">
+                  <button {{action "deleteCost"}} type="button" class="btn erase">Borrar</button>
+                  <button {{action "cancelCost"}} type="button" class="btn cancel">Cancelar</button>
+                  <button {{action "saveCost"}} type="button" class="btn save">Guardar</button>
+                </div>
+              </div>
+            {{else}}
+              <div style="width:45px;float:left;display:block;"><span2></span2></div>
+              <div style="padding-top:5px;" class="fifty">
+                {{{costo.description}}}
+              </div>
+              {{#if costo.cfree}}
+                <div style="width:20%;float:left;display:block;" class="text-edit">Gratuito</div>
+              {{else}}
+                <div style="width:20%;float:left;display:block;" class="text-edit">${{costo.amount}} {{costo.divisa}}</div>
+              {{/if}}
+              <div style="width:20%;float:left;display:block;" class="clearfix relative">
+                <div class="button-group pull-right" >
+                  <button {{action 'moveDown'}} {{bind-attr disabled=addCostEvent}} class="btn btn-simple-icon btn-edit-down"><i class="fa fa-caret-down"></i></button>
+                  <button {{action 'moveUp'}} {{bind-attr disabled=addCostEvent}} class="btn btn-simple-icon btn-edit-up"><i class="fa fa-caret-up"></i></button>
+                  <button {{action 'editCost'}} {{bind-attr disabled=addCostEvent}} class="btn btn-simple edit-doc-btn"> Editar </button>
+                </div>
+                <div class="button-edit-group hidden" >
+                  <button {{action 'deleteCost'}} type="button" class="btn erase">Borrar</button>
+                  <button {{action 'cancelCost'}}type="button" class="btn cancel">Cancelar</button>
+                  <button {{action 'saveCost'}} type="button" class="btn save">Guardar</button>
+                </div>
+              </div>
+            {{/if}}
+          </div>
+        </div>
+      {{/each}}
+      <button {{action 'enableCosts'}} type="button" class="btn btn-block btn-add"> + Agregar Nueva Requisición</button>
+      {{#if addCostEvent}}
+        <div class="add-doc">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4>Concepto del costo de requisición</h4>
+              <div style="border-sytle: solid; border-widht: 1px; background-color: white" >
+                {{medium-content-editable value=newCost.description placeholder="Ingresa el concepto" options='{"disablePlaceholders":false,"placeholder":"Escribir Contenido","buttons":["bold","italic","anchor","quote","strikethrough","unorderedlist","orderedlist","justifyLeft","justifyFull","justifyCenter","justifyRight"]}' }}
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <h4>Costo del trámite</h4>
+              <div class="vertical-buffer">
+                {{#if newCost.cfree}}
+                {{else}}
+                  <span class="pull-left" style="font-size: 1.8em; margin-right: 12px; margin-top: 6px;"><b>$</b></span>
+                  {{number-input type="text" class="twentyfive form-control value-add pull-left" valueBinding="newCost.amount" placeholder="000.00"}}
+                  {{view 'select' class="select-add" content=divisas value=newCost.divisa}}
+                {{/if}}
+                  <br>{{input type="checkbox" class="checkbox-original-add" checked=newCost.cfree}} Gratuito
+              </div>
+            </div>
+            <div class="top-buffer">
+              <button {{action 'cancelCosts'}} type="button" class="btn btn-action add-cancel"> Cancelar</button>
+              <button type="button" {{action 'addCostoItem'}} class="btn btn-action publish"> Agregar</button>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+    </section>
+  </div>
+  <div class="panel panel-white clearfix" style="padding: 0 !important;">
+    <header class="panel-heading">Nota Costo</header>
+    <section class="panel-body">
+      {{ medium-content-editable value=model.costNote placeholder="Escribir Contenido" options='{"disablePlaceholders":false,"placeholder":"Escribir Contenido","buttons":["bold","italic","anchor","quote","strikethrough","unorderedlist","orderedlist","justifyLeft","justifyFull","justifyCenter","justifyRight"]}' }}
+    </section>
+  </div>
+  <!-- end panel costo de tramites -->
+
+  <div class="panel panel-white clearfix">
+    <header class="panel-heading">Opciones para realizar el trámite</header>
+    <section class="panel-body" style="padding:15px;">
+        {{ medium-content-editable value=model.presencial data-placeholder="Escribir Contenido" options='{"disablePlaceholders":false,"placeholder":"Escribir Contenido","buttons": ["bold","italic","anchor","quote","strikethrough","unorderedlist","orderedlist","justifyLeft","justifyFull","justifyCenter","justifyRight","removeFormat"]}' }}
+    </section>
+  </div>
+
+  <div class="map-id"></div>
+
+  <section class=" clearfix">
+    <div class="links-wrapper">
+      <button type="button" {{action 'cancelTramite'}} class="btn btn-action cancel pull-left">Cancelar</button>
+      {{#if controller.isPublished}}
+        <div style="float:right;">
+          <button type="button" {{action 'publishTramite'}} {{bind-attr disabled=isComplete}} class="btn btn-action publish pull-right"> Actualizar y Publicar Trámite</button>
+          <button type="button" {{action 'saveTramite'}} class="btn btn-action pull-right">Guardar cambios</button>
+          <button type="button" {{action 'unpublishTramite'}} class="btn btn-action pull-right" style="background-color:#DF7575">Despublicar trámite</button>
+        </div>
+      {{else}}
+        <button type="button" {{action 'publishTramite'}} {{bind-attr disabled=isComplete}} class="btn btn-action publish pull-right"> Publicar Trámite</button>
+        <button type="button" {{action 'saveTramite'}} class="btn btn-action pull-right">Guardar borrador</button>
+      {{/if}}
+    </div>
+  </section>
+  {{else}}
+    {{#if txSaved }}
+        <div class="alert alert-success col-md-5 centered-text" role="alert" style="clear:both; margin: 14px auto; display: table;">
+            <span class="fa fa-check"></span>
+            <span class="sr-only">Éxito:</span>
+            <span style="padding-left:5px;">{{txMessage}}</span>
+        </div>
+    {{else}}
+      <button {{action 'createTramite'}} class="btn btn-action pull-right" {{bind-attr disabled=isActive}} >Crear trámite</button>
+      <button type="button" {{action 'cancelTramite'}} class="btn btn-action cancel pull-left">Cancelar</button>
+    {{/if}}
+  {{/if}}
+
+
+{{/view}}

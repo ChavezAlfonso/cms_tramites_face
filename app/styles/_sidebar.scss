@@ -1,0 +1,78 @@
+.sidebar { 
+    width: auto; text-align: center; position: static; display: block; padding:0; overflow-x: hidden; overflow-y: auto;  background-color: $black; 
+
+    .logo{background: $red; width: 100px; height:50px; text-align: center; position: relative; float:left;}
+    .logo img{@extend .center-full}
+    .navbar-collapse{padding-left: 0; padding-right: 0; clear:both;}
+    .nav-sidebar {  
+        margin-bottom: 20px;   text-align: left;
+        .icon-sidebar, .glyphicon-sidebar{display:none}
+        
+        & > li + li{ border-top:1px solid $gray-dark}
+        & > li > a {  color:darken($brand-text-inverted, 15%); @include fontsize(1.4);  padding: 15px}
+        & > li > a:focus{background: transparent;}
+        & > li.active a{color: $green}
+        & > li > a:hover{background: transparent; cursor:pointer;}
+        
+    }
+     .li-lockdown{position:relative; top:0; left:0; margin-left:0}
+    .navbar-toggle{
+        border-color:transparent;
+        & .icon-bar{background-color:$white;}
+    }
+    .navbar-collapse{
+        max-height:400px;
+    }
+    [class^="icon-"], [class*=" icon-"] {
+        font-size:47px; display:block; color:$white;
+    }
+}
+
+
+.subnav-sidebar{    
+    height:0px;  width: auto; color:$brand-text-inverted; text-align: left; position: relative; padding:0 20px; overflow-x: hidden; overflow-y: auto;  background-color: $black;  
+    &.opened{ height:auto; padding:0  20px 20px;}
+    &>h2{  @extend .light-title; color:darken($brand-text-inverted, 15%);  padding: 8px 0;}
+    &>p{ color:darken($brand-text-inverted, 15%); }
+    hr {border-color: darken($brand-text-inverted, 65%); margin:25px 0;}
+    .subnav-ul {
+        margin-left:20px;
+        & > li{
+            margin: .5em 0;
+            &.top-buffer{margin-top:30px}
+            & > a{ 
+                color: darken($brand-text-inverted, 15%); @include fontsize(1.6);
+                &:hover, &.active{text-decoration: none; color:$green-fluor; }
+                & > i{margin-right: 15px; color:$white;}
+                
+            } 
+
+        }   
+    }
+}
+
+@media (min-width: $screen-sm-min) {
+    .sidebar { 
+        width: 100px; position: fixed; top: 0; bottom: 0; left: 0; z-index: 1000;  padding:0  20px 20px; 
+        .logo{ height: 85px; margin-left: -20px; margin-right: -20px; float:none }
+        .nav-sidebar {
+            text-align: center; margin-right: -20px; margin-left: -20px;
+            .icon-sidebar, .glyphicon-sidebar{display:block}
+             & > li + li{ border-top:none}
+             & > li > a {  @include fontsize(1.4); padding: 15px}
+             & > li.active a{color: $white}
+             & > .active > a:before , & > li > a:hover:before { content: ""; display: block; width: 5px; background: $green;  color: #fff; height: 60px; position: absolute; left: 0px;}
+        }
+        .li-lockdown{position: absolute; bottom: 0; top:inherit; left: 50%; margin-left: -43px;}
+    }
+    .subnav-sidebar{    
+        height:100%; width: 300px; position: fixed; top: 0; bottom: 0; left: -200px; padding:0  20px 20px;   z-index: 900; @include transition(all .6s ease);
+        &.opened{height:100%; left: 100px;}
+    }
+}
+
+@media (max-height: 700px) {
+    .sidebar {
+        .li-lockdown{position:relative; top:0; left:0; margin-left:0}
+    }
+}

@@ -1,0 +1,80 @@
+//== formas
+label {
+	font-weight: 300;
+}
+
+.label-title {
+	@include fontsize(2, 3.8);
+}
+
+.radio label, .checkbox label {
+	font-weight: 300;
+}
+
+.form-inline{
+    .pagination{margin:5px 0}
+}
+.form-control{
+    border-radius: 0;  font-size: 18px;
+    &.no-border { border:none; box-shadow: none;}
+    &.inline { width:auto; display:inline-block; }
+}
+.input-lg {
+    height:60px; font-size: 20px; border-color:$gray-light-bg;color: $brand-text; font-weight:300; @include box-shadow(0px 2px 5px 0px rgba(50, 50, 50, 0.1))
+}
+
+.has-success .form-control-feedback {
+	color:$green; font-size:24px; top:7px; right:10px;
+}
+
+.has-success .form-control {border-color:$gray-light-bg;
+
+}
+
+.edit-option { display: inline-block; color:$gray-light; height: 45px; padding: 6px 12px; font-size: 12px; line-height: 1.22857; background-color: $white; border: 1px solid $gray-light-bg; border-radius: 0; transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;}
+
+.search-small { font-size:12px; min-width:280px;}
+
+.search-submit {
+	.fa-search{@include fontsize(1.8); }
+}
+.form-control2{
+  border-radius: 0;
+  font-size: 18px;
+  display: block;
+  width: 100%;
+  height: 45px;
+  padding: 6px 12px;
+  line-height: 1.42857;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+
+.editable {
+  min-height: 140px;
+}
+
+.form-select{
+  height:40px;
+  font-size:14px;
+  border-radius: 0;
+  &.no-border { border:none; box-shadow: none;}
+  &.inline { width:auto; display:inline-block; }
+
+}
+
+.form-control3{
+  height:40px;
+  font-size:14px;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}

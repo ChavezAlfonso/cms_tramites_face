@@ -1,0 +1,350 @@
+//== assets
+
+.panel{
+    background-color:$white;  @extend .bottom-buffer; border-radius:0; border:none; @include box-shadow(none);
+    & > .panel-heading{
+        background-color: $gray; color:$white; padding: 22px 25px; overflow: hidden; border-color:transparent; border-radius:0; border-bottom:0;
+        & > h5{ font-weight: 300; margin:0; float: left;  color:$gray-ultralight }
+        & > a {font-weight: 300; display:block; height:100%; margin: -22px -25px; padding: 22px 25px; color: $brand-text-inverted; background-color: darken($gray, 10%);}
+        & > .inbox { position:absolute; margin-left:25px; margin-top:-5px; display:inline-block; text-align: center; line-height: 30px; background-color: $red; min-width:30px; height: 30px; border-radius:100%; font-size:18px; }
+        .fa{@include fontsize(1.8); }
+        .navbar-nav>li{margin-right: 5px}
+        .center-line{line-height: 40px}
+       ul li{}
+
+    }
+    .panel-body {
+        border: 1px solid $gray-light; border-top:none; padding: 20px 10px 10px; background-color:$gray-light-bg;
+        h1, .h1, h2, .h2, h3, .h3{margin-top:0}
+        .nav { text-align: center; }
+        .nav li { margin-bottom: 10px; }
+        .label{
+            margin:-10px;
+            .close{margin-right:10px; margin-top:-3px}
+        }
+    }
+}
+
+
+
+.panel-light{
+    border: 1px solid darken($gray-lighter,7%); border-radius:7px;
+    ul{margin:0}
+    & > .panel-heading{
+        background-color: $gray-lighter; font-weight:300; @include border-top-radius(7px); padding: 18px 25px;  font-size:16px; color: $brand-text;
+        & > .navbar-nav{
+            li{float:left;}
+        }
+        .switch-indicator{
+            margin-top: 16px; margin-right: 14px;
+
+        }
+    }
+    .panel-body{
+        border:none; padding:10px 10px 10px; background-color:lighten($gray-ultralight, 20%);
+    }
+    & > .panel-footer {
+        @include border-bottom-radius(7px); border-color:transparent;
+        .btn-publish {
+            background-color: $green-light; margin:10px auto; border-radius:0; border-bottom-right-radius:0; padding: 20px; font-size:20px; font-weight: 300; min-width: 100%; float:none;
+            &:hover{
+                background-color: darken($green-light, 15%); color:$white;
+            }
+        }
+        .links-wrapper {
+            float: none; margin-top:17px; width:100%; @include clearfix();
+            .save-link, .cancel-link{ display:block; margin-bottom: 10px; text-align: center; float:none; }
+            .save-link {float:none; }
+        }
+    }
+}
+
+.panel-white{
+    border: 1px solid darken($gray-lighter,7%);  border-radius: 3px;
+    ul{margin:0}
+    & > .panel-heading{
+        background-color: transparent; font-weight:300; @include border-top-radius(7px); padding: 5px 25px 2px;  font-size:16px; color: $brand-text; border-bottom: 1px solid darken($gray-lighter,7%); min-height:initial;
+        & > .navbar-nav{
+            li{float:left;}
+        }
+        .switch-indicator{
+            margin-top: 16px; margin-right: 14px;
+
+        }
+    }
+    .panel-body{
+        border:none; padding:10px 10px 10px; background-color:lighten($gray-ultralight, 20%);
+    }
+    & > .panel-footer {
+        @include border-bottom-radius(7px); border-color:transparent;
+        .btn-publish {
+            background-color: $green-light; margin:10px auto; border-radius:0; border-bottom-right-radius:0; padding: 20px; font-size:20px; font-weight: 300; min-width: 100%; float:none;
+            &:hover{
+                background-color: darken($green-light, 15%); color:$white;
+            }
+        }
+        .links-wrapper {
+            float: none; margin-top:17px; width:100%; @include clearfix();
+            .save-link, .cancel-link{ display:block; margin-bottom: 10px; text-align: center; float:none; }
+            .save-link {float:none; }
+        }
+    }
+}
+
+.panel-gray {
+    & > .panel-heading {
+        background-color:lighten($gray-light, 10%);
+    }
+    .panel-body{
+        border:none; padding:10px 10px 10px; background-color:lighten($gray-ultralight, 20%);
+    }
+}
+
+
+.left-panel {
+    min-height: 500px;
+    h4 { background-color: $gray-lighter; margin:10px -15px ; padding:15px 10px; text-align: center;}
+    label { font-size:16px;}
+    .radio, .checkbox{ min-height:0 !important;}
+}
+
+.panel-dark-gray{
+    & > .panel-heading{
+        background-color: $gray; color:$white; padding: 12px 25px; line-height: 34px;
+    }
+    & > .panel-body{
+        &.edit{position: relative; }
+        &.edit:before{ width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid $gray; display:block; content: " ";  position:absolute; top:0;
+        }
+    }
+}
+
+.panel-green{
+    border-radius: 0;
+    & > .panel-heading{
+        background-color: $green-dark; color:$white; padding: 12px 25px; line-height: 34px; border-radius: 0;
+    }
+    & > .panel-body{
+        &.edit{position: relative; }
+        &.edit:before{ width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 10px solid $accept-color; display:block; content: " ";  position:absolute; top:0;
+        }
+    }
+}
+
+//==modulos activos
+.panel-module{
+    & > .panel-heading {
+        .white { color: $white;}
+        .fa-question-circle { font-size: 20px;}
+    }
+    & > .panel-body{
+        padding: 0;
+    }
+    .module-info{background-color: $gray-lighter; padding:25px; margin:0}
+    .btn-transparent {
+        .fa {@include fontsize(3.2, 1); }
+    }
+
+
+    .module{
+        border: 1px solid $gray-lighter; padding:10px; @include fontsize(1.7); color: $gray;
+        .info{ @include fontsize(2.2); }
+        .settings{ float:right; margin-right:15px;}
+    }
+    .highlight {
+        padding:20px; border-radius:0; border:2px solid $gray-lighter; margin-top: 30px; background-color:lighten($gray-lighter, 5%);
+    }
+    .panel-footer {
+        min-height: 70px; margin-top: 50px;
+    }
+
+
+}
+
+.panel-steps, .panel-categories {
+    .panel-body {
+        padding:0;
+    }
+}
+
+
+.info{ color: $gray-light; }
+
+.streaming{
+    border-top:none;
+    & > .panel-heading{
+       color: $white; padding:0;background-color:transparent;
+    }
+    .youtube-panel{
+        background-color:$red; float:left; padding:11px 40px; margin-right:40px;position:relative; color:$white;
+        .white-caret{ position: absolute; bottom:-5px; left:50%; font-size:30px; margin-left:-5px}
+    }
+    .streaming-text{background-color:$gray;padding:9px 15px; margin-top:2px; color:$white;}
+}
+.fa.record{
+    background-color:$white; border-radius:50%; color:$red; font-size:15px;
+}
+
+.sortable {
+    .add-doc {
+        margin-top: -55px; position:relative; z-index:3;
+    }
+}
+
+
+.youtube-video{max-width:100%}
+.video-state{margin-right:50px; @include fontsize(1.9)}
+
+.well{
+    background-color:lighten($gray-light-bg, 8%); border-radius:0; @include box-shadow(none); position:relative; min-width:100%; margin-bottom: 5px;
+    & > a { color:$brand-text; display:inline-block; width:100%; height:100%;}
+    &.well-sm{min-height:80px;}
+    &.angle{ padding-right: 15px; display:table; }
+    &.angle .indicator{  @include fontsize(3.8); color: $gray-light; font-weight: bold; display: table-cell; vertical-align: middle; position: relative; left: 8px}
+    h1,h2,h3,h4,h5,h6, p{ font-weight:300;}
+    strong { font-weight:600;}
+    p{margin: 0}
+    small{color:$gray-light; @include fontsize(1.4);}
+    a &{ color: $black}
+    .indicator{ @include fontsize(3.8); color: $gray-light; color:darken($brand-text, 10%); line-height: 5.8rem; display: table-cell; vertical-align: middle; }
+    .fa-close{
+        @include fontsize(2.6);
+        a &:hover{text-decoration: none; color:$black}
+    }
+    &.dark{background-color:$gray}
+    &.light{background:$gray-lighter }
+    &.ultralight{background:$gray-ultralight }
+    &.white{background:$white}
+}
+
+.chart{height: 300px}
+
+.quicktool{
+     margin-bottom: 10px;
+    &>a{ color:$gray; padding: 10px; display: block; background-color: $gray-lighter; border-radius: 5px; text-align: center}
+    &>a:hover{ text-decoration: none; background-color: $gray-light}
+
+    &>.quicktool-icon{float:left; min-width: 35px }
+    &>.quicktool-text{ margin-left: 40px; }
+}
+
+.no-messages{text-align: center; background-color: $gray-lighter; color: $gray-light; padding: 50px; @include fontsize(1.6); border: 1px $gray dashed}
+
+
+.red-circle-btn{
+   display:block; position: absolute; top:50%; margin-top:-8px; right:20px;  width:22px; height:22px; background:$gray-light-bg; border-radius: 50%; border: 1px solid $gray-light;
+   &:after { display:block; content:""; position: absolute; top:50%; left:50%; margin-left:-6px; margin-top:-6px; width:12px; height: 12px; background-color:$red; z-index:1; border-radius: 50%; }
+   &:hover:after { background-color: darken($red, 10%);}
+}
+
+
+.module {
+    .wrapper {
+        @include clearfix(); border-bottom: 1px solid darken($gray-lighter, 10%); padding:20px;
+        p { margin-bottom: 0; padding-right: 10px; }
+    }
+    .checkbox-inline { font-weight: 300; }
+    label { margin-bottom: 0; }
+    .textarea {
+        width: calc(100% - 49px); font-size: 14px; margin: 0; padding: 0;
+    }
+}
+
+.sortable {
+  counter-reset:span2;
+  span2 { position:relative; }
+  span2:before { content: counter(span2); counter-increment: span2; padding: 4px; color: #999999; font-size: 22px; font-weight: 500; display: block; float: left; line-height: 1; }
+}
+
+.add-doc {
+    background-color: lighten($gray-light-bg, 5%); padding:30px 25px;
+}
+
+
+.links-wrapper {
+    @include clearfix();
+    .btn { margin-left: 20px;}
+    .cancel-link { @include fontsize(1.8, 5.1); }
+}
+
+@media (min-width: $screen-sm-min) {
+    .panel {
+        .nav { text-align: left; }
+        .nav li { margin-bottom: 0; }
+    }
+
+    .panel-light {
+        ul{margin:0}
+        & > .panel-heading{
+             line-height: 34px;
+            & > .navbar-nav.center-line{ }
+        }
+        .panel-body{
+            border:none; padding:15px;
+        }
+
+        & > .panel-footer {
+            @include clearfix();  min-height: 70px;
+            .btn-publish {
+                background-color: $green-light; margin:-10px -15px; border-radius:0; border-bottom-right-radius:5px; padding: 20px 50px; font-size:24px; font-weight: 300; min-width: 330px;  float: right;
+            }
+            .links-wrapper {
+                float: left; margin-top:17px; float:left; width:calc(100% - 350px); @include clearfix();
+                .save-link, .cancel-link{ display:inline-block;  margin-bottom: 0; float:left;}
+                .save-link {float:right;}
+            }
+        }
+    }
+
+    .panel-white {
+        ul{margin:0}
+        & > .panel-heading{
+             line-height: 34px; min-height:initial;
+            & > .navbar-nav.center-line{ }
+        }
+        .panel-body{
+            border:none; padding:15px;
+        }
+
+        & > .panel-footer {
+            @include clearfix();  min-height: 70px;
+            .btn-publish {
+                background-color: $green-light; margin:-10px -15px; border-radius:0; border-bottom-right-radius:5px; padding: 20px 50px; font-size:24px; font-weight: 300; min-width: 330px;  float: right;
+            }
+            .links-wrapper {
+                float: left; margin-top:17px; float:left; width:calc(100% - 350px); @include clearfix();
+                .save-link, .cancel-link{ display:inline-block;  margin-bottom: 0; float:left;}
+                .save-link {float:right;}
+            }
+        }
+        &.disabled {
+            position:relative;
+            &:after {
+                content: " "; position:absolute; top:0; bottom:0; left:0; right:0; background-color:rgba( $white, .5);
+            }
+
+        }
+    }
+
+    .panel-steps {
+        .panel-body {
+            padding:0;
+        }
+    }
+
+
+    .streaming{
+        border-top:none;
+        & > .panel-heading{
+           color: $white; padding:0;background-color:transparent;
+        }
+        .youtube-panel{
+            background-color:$red; float:left; padding:11px 40px; margin-right:40px;position:relative; color:$white;
+            .white-caret{ position: absolute; bottom:-5px; left:50%; font-size:30px; margin-left:-5px}
+        }
+        .streaming-text{background-color:$gray;padding:9px 15px; margin-top:2px; color:$white;}
+    }
+    .fa.record{
+        background-color:$white; border-radius:50%; color:$red; font-size:15px;
+    }
+}

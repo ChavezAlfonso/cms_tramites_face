@@ -1,0 +1,35 @@
+ <main class="login-wrapper" role="main">
+    <section class="login-sec">
+      <div class="login-container">
+        <form role="form" class="form-horizontal">
+          <img src="assets/images/gobmx-logo.png" alt="gob.mx">
+          <div class="login-box">
+            <header>
+              <h5><strong>Bienvenido</strong>, ingresa tus datos</h5>
+            </header>
+            <div class="form-group">
+              <label for="loginUser" class="col-sm-4 control-label">Usuario</label>
+              <div class="col-sm-8">
+                {{input type="text" class="form-control" id="loginUser" value=identification placeholder="usuario"}}
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <label for="loginPassword" class="col-sm-4 control-label">Contraseña</label>
+              <div class="col-sm-8">
+                {{input type="password" class="form-control" id="loginPassword" value=password placeholder="Contraseña"}}
+              </div>
+            </div>
+          </div>
+          <small>¿Olvidaste tu contraseña? <a style="cursor:pointer;" {{action 'goToSolicitud'}}>Solicita una reposición aquí</a></small>
+          <button {{action 'authenticate'}} class="btn btn-large btn-success" type="button">Iniciar sesión</button>
+        </form>
+        <div class="alert alert-danger hidden col-md-10 col-md-push-1 clearfix" role="alert" style="margin-top:15px;display:table;">
+            <span class="fa fa-exclamation" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+          {{controller.message}}
+        </div>
+      </div>
+    </section>
+
+  </main>

@@ -1,0 +1,110 @@
+.alphabet-list {
+    background-color:darken($gray-lighter, 10%); position:absolute; width:40px; border-radius:25px; right: 0px; top:20px; padding:5px 0;
+    a {
+        display:block; text-align: center; color:$gray-light; @include fontsize(1.6); margin-top: 3px; margin-bottom: 3px; 
+        &.active { 
+            background-color:darken($btn-save, 10%); border-radius:50%; color:$white; font-weight: 300;  width:28px; height:28px; line-height:28px; margin-left: auto; margin-right: auto;
+        &:hover, &:focus { color: $white; cursor:default; text-decoration: none; outline:none;}
+        }
+        &:hover, &:focus { text-decoration: none; color:darken($btn-save, 10%); outline:none;}
+    }
+
+}
+
+.categoria {
+    .search-query {
+        margin-left: 20px;
+    }
+}
+
+.all-categories {
+    width: calc(100% - 65px);
+
+    .module:nth-child(odd) {
+        background-color:$gray-ultralight;
+    }
+    .module:nth-child(even) {
+        background-color:$white;
+    }
+
+    .module, .sub-module {
+        @include clearfix(); padding: 15px 40px 15px 20px;
+        &.active {
+            background:lighten($blue-gray, 12%);
+        }
+        .checkbox { margin:0;}
+    }  
+
+    .sub-module { 
+        background: linear-gradient(to bottom, darken($gray-ultralight, 6%) 0%, darken($gray-ultralight, 8%) 100%); position:relative;padding: 15px 40px 15px 40px; overflow:hidden;
+        &:before {
+            content: " "; display:block; position:absolute; width:1px; height:100%; top:0; bottom:0; background-color:darken($gray-ultralight, 25%); left:25px;
+        }
+        &:after { content: " "; display:block; position:absolute; top:50%; left:20px; margin-top: -6px; width:12px; height:12px; border-radius:50%; background-color:darken($gray-ultralight, 8%); border: 1px solid darken($gray-ultralight, 25%);}
+    }
+}
+
+.panel-categories {
+    border-bottom: 1px solid darken($gray-lighter, 5%);
+}
+
+.cats-title {
+    @include clearfix(); margin-top: 20px; margin-bottom: 10px;
+    .settings { margin-top: 5px;}
+}
+
+.edit-category {
+    border-top: 1px solid darken($btn-save, 10%); overflow:hidden; border-bottom: 1px solid darken($btn-save, 10%); max-height:400px;  @include transition(all 500ms ease );
+    &.invisible {
+        max-height: 0; @include transition(all 500ms ease );
+    }
+    .wrapper { 
+        margin:0px 5px; border-left: 1px solid darken($gray-lighter, 5%); border-right: 1px solid darken($gray-lighter, 5%); padding: 30px 20px; position:relative;
+        &:before { content:" "; width:100%; position:absolute; display:block; height:1px; top:0; left:0; right:0;  box-shadow: 0px -1px 9px 1px rgba(0, 0, 0, 0.25);}
+    }
+}
+
+.sub-cat-editer {
+    border : 2px solid darken($gray-ultralight, 10%); padding:20px;
+    textarea { min-height: 110px; }
+}
+
+.create-category {
+    @include transition(all 500ms linear ); max-height:500px; overflow:hidden;
+    &.invisible {
+       max-height:0;  @include transition(all 500ms linear ); 
+    }
+    .btn-action.publish {
+        padding: 15px 35px;
+    }
+}
+
+.edit-description {
+    min-height: 110px;
+}
+
+.edit-cat-btn {
+    display: block;
+}
+
+.adv-search {
+     @include transition(all 500ms linear ); max-height:300px; overflow:hidden;
+     &.invisible {
+       max-height:0;  @include transition(all 500ms linear ); 
+    }
+}
+
+@media (min-height: 780px) {
+    .alphabet-list {
+        position:fixed; width:40px; border-radius:25px; right: 30px; top:185px; padding:5px 0;
+        a {
+            display:block; text-align: center; color:$gray-light; @include fontsize(1.6); margin-top: 3px; margin-bottom: 3px; 
+            &.active { 
+                background-color:darken($btn-save, 10%); border-radius:50%; color:$white; font-weight: 300;  width:28px; height:28px; line-height:28px; margin-left: auto; margin-right: auto;
+            &:hover, &:focus { color: $white; cursor:default; text-decoration: none; outline:none;}
+            }
+            &:hover, &:focus { text-decoration: none; color:darken($btn-save, 10%); outline:none;}
+        }
+
+    }
+}

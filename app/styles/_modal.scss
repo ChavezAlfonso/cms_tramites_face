@@ -1,0 +1,33 @@
+//== modals
+
+.modal-dialog{
+    width: 80%;
+    &.modal-small-width{max-width: 450px;}     
+}
+.modal-content {
+    border-radius: 0;
+}
+.modal-header{
+    background-color: $black; color: $white; position:relative;
+    .close{color:$white; @include alpha(1); background-color:$gray; position: absolute; height: 100%; top:2px; right:0; padding:0 20px}
+}
+.modal-body{
+    border:1px solid $gray-light; margin:5px; background-color: $gray-ultralight;
+}
+
+.modal-dialog.modal-module {
+    max-width: 500px;
+    .modal-body { border: none; background-color: transparent; padding: 20px 5px;}
+    .tab-content {padding: 20px 15px; box-sizing: border-box;  border:1px solid darken($gray-ultralight , 20%); background-color: lighten($gray-ultralight, 30%);}
+    .form-inline {
+        .inline-cont {margin-bottom:5px; @include clearfix();}
+        .social-input { min-width: 280px}
+        .form-control{ margin-right:5px;}
+        .right-margin {margin-right:15px!important}
+        
+    }
+    .search{
+        position:relative;
+        .search-icon {position:absolute; right: 19px; top: 3px; padding: 3px 9px; @extend .gradient-gray; color:$gray-light; border-color:lighten($gray-light, 20%);}
+    }
+}

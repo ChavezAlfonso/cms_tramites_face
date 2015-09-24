@@ -1,0 +1,11 @@
+body, html{font-family: $font-stack; color:$brand-text; overflow-x:  hidden; padding-bottom: 20px; font-weight: 300;}
+body{background-color:$gray-blue}
+b, strong { font-weight:600}
+a{color:$link-blue; }
+h1, h2, h3, h4, h5, h6 {font-weight: 300;}
+h1{@include fontsize(3)}
+h2{@include fontsize(2.8)}
+h3{@include fontsize(2.4)}
+h4{@include fontsize(2)}
+h5{@include fontsize(1.8)}
+h6{@include fontsize(1.6)}

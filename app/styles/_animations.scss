@@ -1,0 +1,40 @@
+
+@-webkit-keyframes imageAnimation{
+  0%{@include alpha(1);}
+  33% {@include alpha(1);}
+  42%{@include alpha(0);}
+  90% {@include alpha(0);}
+  100% {@include alpha(1);}
+}
+
+@-moz-keyframes imageAnimation{
+  0%{@include alpha(1);}
+  33% {@include alpha(1);}
+  42%{@include alpha(0);}
+  90% {@include alpha(0);}
+  100% {@include alpha(1);}
+} 
+
+@-o-keyframes imageAnimation { 
+  0%{@include alpha(1);}
+  33% {@include alpha(1);}
+  42%{@include alpha(0);}
+  90% {@include alpha(0);}
+  100% {@include alpha(1);}
+} 
+
+@-ms-keyframes imageAnimation{ 
+  0%{@include alpha(1);}
+  33% {@include alpha(1);}
+  42%{@include alpha(0);}
+  90% {@include alpha(0);}
+  100% {@include alpha(1);}
+} 
+
+@keyframes imageAnimation{
+  0%{@include alpha(1);}
+  33% {@include alpha(1);}
+  42%{@include alpha(0);}
+  90% {@include alpha(0);}
+  100% {@include alpha(1);}
+}

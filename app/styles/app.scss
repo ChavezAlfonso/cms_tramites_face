@@ -1,0 +1,125 @@
+$icon-font-path: "bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+$fa-font-path: "bower_components/font-awesome/fonts";
+$input-height-base: 45px;
+
+// bower:scss
+@import "bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
+@import "bower_components/font-awesome/scss/font-awesome.scss";
+// endbower
+
+@import "fonts";
+@import "variables";
+@import "defaults";
+@import "mixins";
+@import "animations";
+
+@import "helper-classes";
+@import "icons";
+@import "buttons";
+@import "tooltips";
+@import "tables";
+@import "forms";
+@import "labels";
+@import "tags";
+@import "pagination";
+@import "modal";
+@import "nav-tabs";
+@import "popover";
+@import "thumbnail";
+@import "switch";
+@import "datepicker-bootstrap";
+
+@import "htmldefaults";
+@import "sidebar";
+@import "mainwrapper";
+@import "quicktools";
+@import "userpanel";
+@import "assets";
+@import "generic";
+@import "categories";
+
+@import "print-styles";
+
+.textarea2{
+width: calc(100% - 16px);
+font-size: 14px;
+margin: 0;
+padding: 0;
+}
+.box-simple {
+  position:fixed;
+  display: block;
+  width: 360px;
+  padding: 26px;
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 98px;
+  font-size: 18px;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+}
+
+.box-simple.inverted {
+  background-color: #3c3c3c;
+  color: #fff;
+  position: relative;
+  border-radius: 3px;
+  display: block;
+  width: 360px;
+}
+
+.btn-primary {
+  box-shadow: 0 2px 0 0 #1b5eab;
+  background-color: #3484de;
+}
+.btn2 {
+  border: none;
+  font-size: 18px;
+  border-radius: 3px;
+  padding: 10px 25px;
+  font-weight: 300;
+}
+.btn-block {
+  display: block;
+  width: 100%;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #4A90E2;
+  border-color: #3484de;
+}
+.open.dropdown-toggle {
+  box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+  outline: 0;
+}
+.dropdown-menu {
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  list-style: none;
+  font-size: 18px;
+  text-align: left;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 4px;
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  background-clip: padding-box;
+}
+
+
+.preMenu {
+  word-break:break-all;
+  word-wrap:break-word;
+  padding:0;
+  margin:0;
+  border:0;
+  background-color:transparent;
+}

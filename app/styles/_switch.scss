@@ -1,0 +1,66 @@
+$constant: 28px;
+
+/* ============================================================
+  COMMON
+============================================================ */
+.cmn-toggle {
+  position: absolute;
+  margin-left: -9999px;
+  visibility: hidden;
+}
+.cmn-toggle + label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* ============================================================
+  SWITCH 1 - ROUND
+============================================================ */
+input.cmn-toggle-round + label {
+  padding: 2px;
+  width: $constant*2;
+  height: $constant;
+  background-color: #dddddd;
+  -webkit-border-radius: $constant;
+  -moz-border-radius: $constant;
+  -ms-border-radius: $constant;
+  -o-border-radius: $constant;
+  border-radius: $constant;
+}
+input.cmn-toggle-round + label:before, input.cmn-toggle-round + label:after {
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  bottom: 1px;
+  content: "";
+}
+input.cmn-toggle-round + label:before {
+  right: 1px;
+  background-color: $gray-light;
+  border-radius: $constant;
+  transition: background 0.4s;
+}
+input.cmn-toggle-round + label:after {
+  width: $constant - 2px;
+  background-color: #fff;  
+  border-radius: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: margin 0.4s;
+}
+input.cmn-toggle-round:checked + label:before {
+  background-color: $green-light;
+}
+input.cmn-toggle-round:checked + label:after {
+  margin-left: $constant;
+}
+
+
+
+

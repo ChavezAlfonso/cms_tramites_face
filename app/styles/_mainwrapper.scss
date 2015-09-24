@@ -1,0 +1,22 @@
+.main-wrapper{
+    position: relative; @include transition(all .6s ease); left:0; 
+    &.opened{eft:0;}
+    .topHeader{
+        height: 85px;  border:none; background-color: $gray; position: relative;
+        h2{
+            @extend .light-title; color:$brand-text-inverted; @extend .center-top; margin:0 0 0 20px; padding: 0;
+            &>i{@include fontsize(2.2); margin-right: 7px}
+        }
+    }
+}
+
+.wrapper{ padding: 30px 30px}
+
+
+@media (min-width: $screen-sm-min) {
+    .main-wrapper{
+        margin-left: 100px; @include transition(all .6s ease); left:0; 
+        &.opened{left: 300px;}        
+    }
+}
+

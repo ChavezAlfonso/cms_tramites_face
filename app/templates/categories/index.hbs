@@ -1,0 +1,203 @@
+<div class="main-wrapper">
+  <header class=" topHeader">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <h2> <i class="fa fa-angle-right"></i> Listado de Categorías</h2>
+        </div>
+    </div>
+  </header>
+  <main class="wrapper categoria" role="main">
+    <div class="clearfix bottom-buffer">
+      <div class="search-query pull-right">
+          {{input type="text" value=filter class="form-control search-small" placeholder="Buscar Categorías..." }}
+          <button class="search-submit" type="submit"><i class="fa fa-search"></i></button>
+      </div>
+      <button {{action 'enableNewCategoryForm'}} class="btn btn-simple btn-lg pull-right">Crear Categoría / Subcategoría</button>
+    </div>
+    <div class="relative">
+      <div class="all-categories">
+        {{#if txCatError}}
+            <section class="clearfix">
+                <div class="alert alert-danger col-md-5" role="alert" style="margin: 14px auto; display: table;">
+                    <span class="fa  fa-exclamation-circle"></span>
+                    <span class="sr-only">Error:</span>
+                    <span style="padding-left:5px;">{{txCatMessageError}}</span>
+                </div>
+            </section>
+        {{/if}}
+        {{#if newCategoryEvent }}
+          <!-- bloque para crear una nueva categoría -->
+          <section class="create-category">
+            <h4>Agregar una nueva Categoría / Subcategoría</h4>
+            <div class="well">
+              <div class="row">
+                <div class="col-sm-12 bottom-buffer">
+                  {{input value=newCategoryItem.name class="form-control value-add" placeholder="Nombre categoría"}}
+                </div>
+              </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <h4>Descripción de categoría</h4>
+                    {{textarea value=newCategoryItem.description class="form-control text-add" rows="4" placeholder="Ingresar descripción"}}
+                  </div>
+                  <div class="col-sm-6">
+                    <h4>Categoría Superior</h4>
+                    <div class="vertical-buffer">
+                      {{#if isLoaded}}
+                        {{select-2 content=comboItems value=newCategoryItem.parentCategory placeholder="Seleccionar Categoría Superior" allowClear=true}}
+                      {{else}}
+                      Cargando...
+                      {{/if}}
+                    </div>
+                    <div>
+                      {{input type='checkbox' class="form-edit" checked=newCategoryItem.visible}} Visible
+                      <div class="row">
+                          <div class="col-sm-6">
+                            {{number-input type="text" value=newCategoryItem.order placeholder="0" }} Orden
+                            <i class="fa fa-arrow-circle-up" {{ action 'changeOrderNew'  true  }}></i>
+                            <i class="fa fa-arrow-circle-down" {{ action 'changeOrderNew'  false }}></i>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="top-buffer">
+                      <button {{action 'cancelNewCategoryForm'}} type="button" id="cancelCategory" class="btn btn-action add-cancel">Cancelar</button>
+                      <button {{action 'saveNewCategoryForm'}} {{bind-attr disabled=disableCategorySave}} type="button" id="addCategory" class="btn btn-action publish">Agregar Categoría / Subcategoría</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </section>
+          <!-- end bloque para crear una nueva categoría -->
+      {{/if}}
+      {{#if txCatEvent}}
+        <section class="clearfix">
+          <div class="alert alert-success col-md-5" role="alert" style="margin: 14px auto; display: table;">
+              <span class="fa fa-check"></span>
+              <span class="sr-only">Éxito:</span>
+              <span style="padding-left:5px;">{{txCatMessage}}</span>
+          </div>
+        </section>
+      {{/if}}
+
+      <!-- categoría con subcategorías -->
+      {{#each category in filteredCategory itemController="categories.itemCategory"}}
+        {{#if category.txSubEvent}}
+          <section class="clearfix">
+            <div class="alert alert-success col-md-4" role="alert" style="margin: 14px auto; display: table;">
+              <span class="fa fa-check"></span>
+              <span class="sr-only">Éxito:</span>
+              <span style="padding-left:5px;">{{category.txMessage}}</span>
+            </div>
+          </section>
+        {{/if}}
+        <section class="category">
+          <!-- título y botón editor de categoría -->
+          <div data-name="indexa" class="cats-title clearfix vertical-buffer">
+            <h4 class="pull-left">{{category.name}}</h4>
+            <button {{action 'editCategoryForm'}} class="btn btn-default settings pull-right" type="button"><i class="fa fa-cog"></i></button>
+          </div>
+          {{#if category.txInnerCatEvent}}
+              <section class="clearfix">
+                  <div class="alert alert-success col-md-4" role="alert" style="margin: 14px auto; display: table;">
+                      <span class="fa fa-check"></span>
+                      <span class="sr-only">Éxito:</span>
+                      <span style="padding-left:5px;">{{category.txInnerMessage}}</span>
+                  </div>
+              </section>
+          {{/if}}
+          {{#if category.editCategoryEvent }}
+            <!-- editor de categoría -->
+            <section class="edit-category">
+              <div class="wrapper">
+                <div class="row">
+                  <div class="col-sm-6">
+                    {{input value=category.name class="form-control edit-name" placeholder="Nombre categoría"}}
+                    <div style="margin-top:15px;">
+                      <label>Visible</label>
+                      {{input type="checkbox" class=form-control checked=category.visible}}
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <label>Orden</label>
+                          {{number-input type="text" value=category.order placeholder="0"}}
+                          <i class="fa fa-arrow-circle-up" {{ action 'changeOrder' true category }}></i>
+                          <i class="fa fa-arrow-circle-down" {{ action 'changeOrder' false category }}></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    {{textarea value=category.description class="form-control edit-description" cols="15"  placeholder="Ingresar descripción"}}
+                  </div>
+                </div>
+                <div class="row top-buffer">
+                  <div class="col-sm-6">
+                    <button {{action 'deleteCategoryItem' category}} type="button" class="btn btn-simple edit-delete-btn"> Eliminar categoría</button>
+                  </div>
+                  <div class="col-sm-3">
+                    <button {{action 'cancelCategoryItem'}} type="button" class="btn btn-simple edit-cancel-btn">Cancelar edición</button>
+                  </div>
+                  <div class="col-sm-3">
+                    <button {{action 'saveCategoryItem'}} {{bind-attr disabled=category.disableCategorySave}} type="button" class="btn btn-simple pull-right edit-save-btn"> Guardar cambios</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- end editor de categoría -->
+          {{/if}}
+          <!-- listado de subcategorías -->
+          <div id="" class="panel panel-gray panel-categories">
+            <header class="panel-heading">
+              Subcategoría
+              <span class="pull-right">Trámites</span>
+            </header>
+            <section class="panel-body">
+              {{#each subcategory in category.subcategories itemController="categories.itemSubcategory"}}
+                <div class="module">
+                  <div class="checkbox fifty">
+                    {{#view "categories/subcategory"}}
+                      {{input type="checkbox" checked=subcategory.visible}}
+                      <span>{{subcategory.name}}</span>
+                      {{#if subcategory.hoverEvent }}
+                        <a {{action "editSubcategoryEvent"}} class="edit-cat-btn" href="#">(Editar esta categoría)</a>
+                      {{/if}}
+                    {{/view}}
+                  </div>
+                  <div class="fifty text-right  ">...</div>
+                </div>
+                {{# if subcategory.isEditingSubcategory }}
+                  <div class="sub-cat-editer">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        {{input value=subcategory.name class="form-control edit-name" placeholder="Nombre categoría"}}
+                        <div class="vertical-buffer">
+                          {{select-2 content=subcategory.comboItems value=subcategory.parentItem placeholder="Seleccionar Categoría Superior" allowClear=true}}
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        {{textarea value=subcategory.description class="form-control text-add" cols="15" placeholder="Ingresar descripción"}}
+                      </div>
+                    </div>
+                    <div class="row top-buffer">
+                      <div class="col-sm-6">
+                        <button {{action "deleteSubcategoryEvent"}} type="button" class="btn btn-simple delete-sub-cat"> Eliminar Subcategoría</button>
+                      </div>
+                      <div class="col-sm-3">
+                        <button {{action "cancelSubcategoryEvent"}} type="button" class="btn btn-simple cancel-sub-cat">Cancelar edición</button>
+                      </div>
+                      <div class="col-sm-3">
+                        <button {{action "saveSubcategoryEvent"}} {{bind-attr disabled=subcategory.disableSubcategorySave}} type="button" class="btn btn-simple pull-right save-sub-cat"> Guardar cambios</button>
+                      </div>
+                    </div>
+                  </div>
+                {{/if}}
+
+              {{/each}}
+            </section>
+          </div>
+          <!-- end listado de subcategorías -->
+        </section>
+      {{/each}}
+    </div>
+    </div>
+  </main>
+</div>

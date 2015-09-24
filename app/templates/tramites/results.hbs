@@ -1,0 +1,115 @@
+<div class="main-wrapper">
+    <header class="topHeader">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <h2> <i class="fa fa-angle-right"></i> Listado de Trámites</h2>
+            </div>
+        </div>
+    </header>
+
+    <main class="container-fluid wrapper tramites-listado" role="main">
+        <div class="clearfix">
+            <div class="search-query pull-right">
+                {{input type="text" value=filter class="form-control search-small" placeholder="Buscar trámites..." }}
+                <button class="search-submit" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+            <button {{action 'createNewTramite' }} class="btn btn-simple btn-lg pull-right right-margin ">Nuevo trámite</button>
+        </div>
+
+        <div class="clearfix">
+            <button {{action 'displayAdvSearch'}} class="btn-link pull-right adv-search-btn top-margin bottom-buffer">Búsqueda avanzada</button>
+        </div>
+
+
+        <div class="panel panel-white no-margin adv-search invisible">
+            <header class="panel-heading">
+                Búsqueda Avanzada
+            </header>
+            <section class="panel-body">
+                <div class="container-fluid clearfix">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{input type="text" value=namesearch class="form-control" id="stepName" placeholder="Introduce el nombre del trámite"}}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{select-2 content=secretarias value=selectedSecretaria placeholder="Seleccionar Dependencia" optionDescriptionPath='siglas' optionLabelPath="name" allowClear=true}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{select-2 content=subcategorias value=selectedSubcategoria placeholder="Seleccionar Subcategoria" optionDescriptionPath='name' optionLabelPath="name" allowClear=true}}                                
+                            </div>
+                        </div>
+                        <div class="col-sm-4 col-sm-offset-2">
+                            <button {{action 'advancedSearch' namesearch selectedSecretaria selectedSubcategoria}} type="button" class="btn btn-simple btn-block"> Realizar búsqueda</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <section id="actionButtonLink" class="hidden">
+                                <label for="" class="label-title">Enlace para botón de acción</label>
+                                <input type="text" class="form-control" placeholder="Escribir enlace">
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <table class="table table-hover table-striped table-order">
+            <colgroup>
+                <col class="col-xs-4">
+                <col class="col-xs-2">
+                <col class="col-xs-2">
+                <col class="col-xs-2">
+                <col class="col-xs-2">
+            </colgroup>
+            <thead>
+            <tr>
+                <th >Nombre de la entrada</th>
+                <th>Fecha de creación</th>
+                <th>Estado</th>
+                <th>Categoría</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each tramite in filteredContent itemController="tramites.itemTramite"}}
+              <tr>
+                  <td>
+                      <div class="checkbox">
+                          <label><input type="checkbox">{{tramite.name}}</label>
+                      </div>
+                  </td>
+                  <td>{{current-date tramite.created_at}}</td>
+                  <td>{{status-tramite tramite.status}}</td>
+                  <td class="hidden">{{tramite.dependence}}</td>
+                  <td>{{subcats-name tramite.subcats}}</td>
+                  <td>
+                      <button {{action 'deleteTramite' tramite}} class="btn btn-default settings pull-right delete-row" type="button"><i class="fa fa-trash"></i></button>
+                      <button {{action 'goToTramite' tramite}} class="btn btn-default settings pull-right right-mini-space" type="button"><i class="fa fa-cog"></i></button>
+                      <button {{action 'goToPreview' tramite}} class="btn btn-default settings pull-right right-mini-space" type="button"><i class="fa fa-eye"></i></button>
+                  </td>
+              </tr>
+              {{else}}
+              <tr>
+                <td colspan="10" style="text-align:center;">No hay trámites disponibles.</td>
+              </tr>
+            {{/each}}
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5"></td>
+            </tr>
+            </tfoot>
+        </table>
+
+
+    </main>
+</div>

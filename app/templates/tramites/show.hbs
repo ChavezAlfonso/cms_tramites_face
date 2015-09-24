@@ -1,0 +1,178 @@
+<div class="main-wrapper" style="background-color:#FFF;">
+    <header class=" topHeader">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <h2>
+                  <i class="fa fa-angle-right"></i> Edición / {{#link-to 'tramites.edit' model}}{{controller.homoclave}} {{/link-to}}
+                {{#if model.isPublic }}
+                  <i style="margin-left:50px;" class="fa fa-angle-right"></i> Ficha Ciudadana / <a target="_blank" href="http://www.gob.mx/tramites/ficha/{{unbound controller.homoclave}}">{{controller.homoclave}}</a>
+                {{/if}}
+                </h2>
+            </div>
+        </div>
+    </header>
+<div class="container">
+
+    <!--<ol class="breadcrumb">-->
+        <!--<li><a href="#"><i class="icon icon-home"></i></a></li>-->
+        <!--<li><a href="/">Inicio</a></li>-->
+        <!--<li class="active">Trámites</li>-->
+    <!--</ol>-->
+
+    <div class="row">
+        <div class="col-sm-12 col-md-7">
+          <h5 class="small-top-buffer special" style="margin-top:36px; margin-bottom:27px;font-weight:600;font-size:18px;color:rgb(84, 84, 84);">{{controller.secretaria}}</h5>
+          <h4 style="margin-bottom:42px;line-height:130%;font-weight:600;font-size:38px;color:rgb(84, 84, 84);">{{model.name}}</h4>
+
+          <p class="text-area description" style="font-size: 18px;">
+            {{wysiwyg-container onElement="description" asElement="<div/>" htmlValue=model.description}}
+          </p>
+          {{#if model.cntseId }}
+              <div style="font-size:18px;">
+                  <strong>{{model.cntseId}}</strong>
+              </div>
+          {{/if}}
+          <h3 class="top-buffer" style="color:rgb(84, 84, 84);font-weight:600;font-size:32px;margin-top:64px;margin-bottom:42px;">Documentos necesarios</h3>
+          <ui class="nav nav-tabs">
+            {{#each group in model.documentsGroup }}
+              {{#if group.documents}}
+                  <li id="ni{{unbound group.id}}" >
+                      <a data-toggle="tab" href = "#dg{{unbound group.id}}" {{action "showDocumentsByGroup" group.id}} >
+                        {{group.title}}
+                      </a>
+                  </li>
+              {{/if}}
+            {{/each}}
+          </ui>
+          <div class="tab-content">
+            {{#each group in model.documentsGroup }}
+              <div class="tab-pane" id="dg{{unbound group.id}}" >
+                <h4> {{{group.description}}}</h4>
+                <dl class="dl-wide left-larger" style="font-size:18px;color:rgb(84, 84, 84);font-weight:600;">
+                    <dt><b>Documento requerido</b></dt>
+                    <dd><b>Presentación</b></dd>
+                </dl>
+                {{#each document in group.documents}}
+                    <dl class="dl-wide left-larger" style="font-size:18px;">
+                      {{#if document.isFormat}}
+                          <dt><a target="_blank" href="{{unbound document.linkformat}}">{{{document.description}}}</a></dt>
+                      {{else}}
+                          <dt>{{{document.description}}}</dt>
+                      {{/if}}
+                        <dd>{{{document.formattedQuantity}}}</dd>
+                    </dl>
+                {{/each}}
+                <div class="cost-notes well well-sm small small-top-buffer" style="font-size:95%;padding:26px;">
+                  {{{group.note}}}
+                </div>
+              </div>
+            {{/each}}
+          </div>
+          <h3 class="top-buffer" style="color:rgb(84, 84, 84);font-weight:600;font-size:32px;margin-top:64px;margin-bottom:42px;">Costos</h3>
+          <dl class="dl-wide left-larger" style="font-size:18px;color:rgb(84, 84, 84);font-weight:600;">
+            <dt><b>Concepto</b></dt>
+            <dd><b>Monto</b></dd>
+          </dl>
+          {{#each costo in model.costs}}
+            <dl class="dl-wide left-larger" style="font-size:18px;">
+              <dt>{{{costo.description}}}</dt>
+              <dd>
+                <strong>
+                  {{#if costo.cfree}}
+                    Gratuito
+                  {{else}}
+                    {{costo.amountFormatted}}
+                  {{/if}}
+                </strong>
+              </dd>
+            </dl>
+          {{/each}}
+          {{#if model.costNote }}
+            <div class="cost-notes well well-sm small small-top-buffer" style="font-size:95%;padding:26px;">
+              {{wysiwyg-container onElement="cost-notes" asElement="<p/>" htmlValue=model.formattedCostNote}}
+            </div>
+          {{/if}}
+          <h3 class="top-buffer" style="color:rgb(84, 84, 84);font-weight:600;font-size:32px;margin-top:64px;margin-bottom:42px;">Opciones para realizar tu trámite</h3>
+          <div class="text-area opciones-tramite" style="font-size: 18px;margin-bottom:100px;">
+            {{wysiwyg-container onElement="opciones-tramite" asElement="<p/>" htmlValue=model.formattedOpcionesTramite}}
+          </div>
+        </div> <!--/.xol-sm-8 -->
+        <div class="col-sm-12 col-md-offset-1 col-md-4 aside special-simple" style="  font-family: 'Open Sans','Helvetica Neue','Helvetica','Arial','sans-serif';font-size: 18px;padding-top:92px;">
+          {{#if controller.tlineLinks }}
+            <div class="box-simple inverted" style="margin-bottom:5px;">
+              <div id="dropDownTOnLine" class="btn-group btn-block">
+                  <button {{action "dropDownTOnLine"}} class="btn2 btn-primary btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                      <i class="icon-tramite-iniciar"></i> Trámite en línea <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" style="margin-top:5px;">
+                    {{#each itemLink in controller.tlineLinks}}
+                      <li><a target="_blank" href="{{unbound itemLink.link}}"><pre class="preMenu">{{{itemLink.description}}}</pre></a></li>
+                    {{/each}}
+                  </ul>
+              </div>
+            </div>
+          {{/if}}
+          {{#if controller.soltdLinks }}
+            <div class="box-simple inverted" style="margin-bottom:5px;">
+              <div id="dropDownSolicitud" class="btn-group  btn-block ">
+                <button {{action "dropDownSolicitud"}} class="btn2 btn-primary btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                    <i class="icon-tramite-iniciar"></i> Haz tu cita <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style="margin-top:5px;">
+                  {{#each itemLink in controller.soltdLinks}}
+                    <li><a target="_blank" href="{{unbound itemLink.link}}"><pre class="preMenu">{{{itemLink.description}}}</pre></a></li>
+                  {{/each}}
+                </ul>
+              </div>
+            </div>
+          {{/if}}
+          {{#if controller.plineLinks }}
+            <div class="box-simple inverted" style="margin-bottom:5px;">
+              <div id="dropDownPLine" class="btn-group btn-block ">
+                <button {{action "dropDownPLine"}} class="btn2 btn-primary btn-block dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                    <i class="icon-tramite-iniciar"></i> Pago en Línea <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style="margin-top:5px;">
+                  {{#each itemLink in controller.plineLinks}}
+                      <li><a target="_blank" href="{{unbound itemLink.link}}"><pre class="preMenu">{{{itemLink.description}}}</pre></a></li>
+                  {{/each}}
+                </ul>
+              </div>
+            </div>
+          {{/if}}
+          {{#if controller.formatLinks}}
+              <div id="dropDownFormat" class=""  style="margin-bottom:5px;">
+                  <a style="cursor: pointer;" {{action "dropDownFormat"}}>Descargar Formatos</a>
+                  <ul class="dropdown-menu" role="menu">
+                    {{#each itemLink in controller.formatLinks}}
+                        <li><a target="_blank" href="{{unbound itemLink.link}}"><pre class="preMenu">{{{itemLink.description}}}</pre></a></li>
+                    {{/each}}
+                  </ul>
+              </div>
+          {{/if}}
+          {{#if controller.infoLinks}}
+            <div id="dropDownMoreInfo" class=""  style="margin-bottom:5px;">
+              <a style="cursor: pointer;" {{action "dropDownMoreInfo"}}>Más Información</a>
+              <ul class="dropdown-menu" role="menu">
+                {{#each itemLink in controller.infoLinks}}
+                  <li><a target="_blank" href="{{unbound itemLink.link}}"><pre class="preMenu">{{{itemLink.description}}}</pre></a></li>
+                {{/each}}
+              </ul>
+            </div>
+          {{/if}}
+          {{#if controller.emailLinks}}
+            <div id="dropDownEmail" class=""  style="margin-bottom:5px;">
+              <a style="cursor: pointer;" {{action "dropDownEmail"}}>Correo electrónico</a>
+                <ul class="dropdown-menu" role="menu">
+                  {{#each itemLink in controller.emailLinks}}
+                    <li><i class="icon-ayuda ic-fw "></i><a target="_blank" href="{{unbound itemLink.link}}"><pre class="preMenu">{{{itemLink.description}}}</pre></a></li>
+                  {{/each}}
+                </ul>
+            </div>
+          {{/if}}
+        </div>
+    </div>
+
+</div>
+
+</div>

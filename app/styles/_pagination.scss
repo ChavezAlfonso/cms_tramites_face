@@ -1,0 +1,14 @@
+//== paginación
+
+.pagination {
+    & > li {
+        & > a, > span {
+            margin-left: 2px; margin-right: 2px; color:$gray;
+        }
+    }
+    & > li:first-child, & > li:last-child  {
+	    & > a {
+	    	background-color: $gray; color:$white;
+	    }
+	}
+}

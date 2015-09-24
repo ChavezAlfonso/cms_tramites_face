@@ -1,0 +1,121 @@
+
+.relative { position:relative;}
+
+.center-full{  position: absolute; top: 50%; left: 50%; @include translate(-50%, -50%);}
+.center-top{   position: absolute; top: 50%; @include translate(0, -50%);}
+
+.full-height{min-height: 100%}
+.min-height { min-height: 250px;}
+.min-height-small { min-height: 150px;}
+.min-height-medium { min-height: 400px;}
+
+.light-title{ @include fontsize(2.2, 2.5); font-family: $font-stack; font-weight: 300;}
+.right-mini-space{margin-right: 5px}
+.right-space{margin-right: 10px}
+.shadow-grey{    @include box-shadow(0px 1px 14px 0px rgba(0, 0, 0, 0.89));}
+
+.fifty { float:none; width:auto;}
+.twentyfive { float:none; width:auto;}
+.onethird { float:none; width:auto; }
+
+
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.division{ border-top: 1px solid #fff}
+
+.top-buffer{margin-top: 20px}
+.bottom-buffer{margin-bottom: 20px}
+.vertical-buffer{margin-top: 20px; margin-bottom: 20px}
+
+.width-padding{padding-left:10px; padding-right: 10px}
+
+.red{color:$red;}
+.green {color:$green}
+.gray {color: $gray}
+.blue-sky{color:$blue-sky}
+
+.large{font-size: 120%}
+.search-query{position:relative}
+.image-edit{position:relative; text-align: center; a{text-decoration: underline}}
+.border-dotted{border: 1px dotted #CCC}
+
+.simple-border {border-bottom: #CCCCCC solid 1px;}
+.double-border {border-bottom: #CCCCCC double medium; }
+.sub-header {  padding-bottom: 10px;   border-bottom: 1px solid #eee;}
+
+.right-margin {margin-right:10px }
+.top-margin {margin-top:10px }
+.auto-margin {margin:auto;}
+.no-margin{margin:0 !important}
+
+.block { display:block;}
+
+.btn-ht { display:block; margin-top: 9px}
+
+.vertical_aligner {  vertical-align: middle;  height: 100%;  display: inline-block;}
+.inline-block {display: inline-block}
+.switch-label{ position:relative; top: -14px; margin: 0 5px 0 7px;}
+
+.border { border: 1px solid darken($gray-lighter, 10%); padding: 10px 15px; border-radius: 3px;}
+.border-bottom { border-bottom: 1px solid darken($gray-lighter, 10%);}
+
+.transition {  transition: all 500ms linear; }
+
+//== centrar vertical
+.row-xs-height {
+    display: flex;
+}
+.col-middle {
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.center-hl-btn { line-height: 35px;}
+
+.video-wrapper { width: 100%; background-color:$gray-lighter; text-align: center; border:2px solid darken($gray-lighter,10%); padding:80px 0; margin:30px 0;}
+
+.gradient-gray {
+background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #ededed 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#ededed)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* IE10+ */
+background: linear-gradient(to bottom, #ffffff 0%,#f6f6f6 47%,#ededed 100%); /* W3C */
+}
+
+.gradient-gray-active{
+   background: #ffffff; /* Old browsers */
+background: -moz-linear-gradient(top, #ffffff 0%, #f6f6f6 47%, #cecece 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(47%,#f6f6f6), color-stop(100%,#cecece)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#cecece 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#cecece 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, #ffffff 0%,#f6f6f6 47%,#cecece 100%); /* IE10+ */
+background: linear-gradient(to bottom, #ffffff 0%,#f6f6f6 47%,#cecece 100%); /* W3C */
+}
+
+@media (min-width: $screen-sm-min) {
+  .fifty { float:left; width:50%;}
+  .twentyfive { float:left; width:25%;}
+  .onethird { float:left; width:33.333333%;}
+}
+
+.dl-wide {
+  display: table; width:100%; border-bottom:1px solid lighten($gray-light, 10%); margin-bottom: 15px; padding-bottom: 20px;
+  &.last { border-bottom:none; margin-bottom: 40px; }
+  dt, dd {  display:table-cell; vertical-align: top;  }
+  dt { width: 48%; font-weight: 400; }
+  dd { padding-left: 2%; width:48%; font-weight: 300; }
+
+}

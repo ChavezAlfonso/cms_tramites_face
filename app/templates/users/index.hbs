@@ -1,0 +1,151 @@
+<div class="main-wrapper">
+    <header class=" topHeader">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <h2> <i class="fa fa-angle-right"></i> Listado de Usuarios</h2>
+            </div>
+        </div>
+    </header>
+
+    <main class="container-fluid wrapper usuarios" role="main">
+        <div class="clearfix">
+            <div class="search-query pull-right">
+                {{input type="text" value=filter class="form-control search-small" placeholder="Buscar usuarios..."}}
+                <button class="search-submit" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+            <button {{action 'newUserEventEnable'}} type="button" class="btn btn-simple btn-lg pull-right right-margin ">Nuevo usuario</button>
+        </div>
+
+        <!-- bloque para crear una nueva categoría -->
+        {{#if newUserEnabled}}
+        <section id="newUser" class="create-category vertical-buffer">
+            <h4>Agregar un nuevo usuario</h4>
+            <div class="well">
+                <div class="row bottom-buffer">
+                    <div class="col-sm-6">
+                      {{input value=newUserInstance.name type="text" class="form-control value-add" placeholder="Nombre"}}
+                    </div>
+                    <div class="col-sm-6">
+                      {{input value=newUserInstance.username type="text" class="form-control value-add" placeholder="Usuario"}}
+                    </div>
+                </div>
+                <div class="row">
+                    <p style="padding-left:15px;">(Se enviará contraseña por correo electrónico proporcionado).</p>
+                    <div class="col-sm-6">
+                        {{email-validate valueBinding="newUserInstance.email" type="email" class="form-control value-add bottom-buffer" placeholder="Correo Electrónico"}}
+                    </div>
+                    <div class="col-sm-6">
+                        {{email-validate valueBinding="newUserInstance.emailConfirm" type="text" class="form-control value-add" placeholder="Confirmar correo electrónico"}}
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    {{select-2 content=rolItems value=newUserInstance.role class="select-add form-control" placeholder="Seleccionar Rol" allowClear=true}}
+                  </div>
+                  <div class="col-sm-6">
+                    <button {{action 'newUserEventDisable'}} type="button" id="cancelUser" class="btn btn-action add-cancel">Cancelar</button>
+                    <button {{action 'saveUser'}} {{bind-attr disabled=isComplete}} type="button" id="addUser" class="btn btn-action publish disabled">Agregar Usuario</button>
+                  </div>
+                  {{#if onNewUserError}}
+                  <div class="alert alert-danger col-md-10 col-md-push-1" role="alert" style="margin: 14px auto; display: table;">
+                    <span class="fa fa-exclamation" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    {{onNewUserError}}
+                  </div>
+                  {{/if}}
+                  {{#if isSendingEmail }}
+                    <div class="alert alert-success col-md-10 col-md-push-1" role="alert" style="margin: 14px auto; display: table;">
+                      <span class="fa fa-check"></span>
+                      <span class="sr-only">Éxito:</span>
+                      <span style="padding-left:5px;">Enviando Correo...</span>
+                    </div>
+                  {{/if}}
+                </div>
+            </div>
+        </section>
+        {{/if}}
+        <!-- end bloque para crear una nueva categoría -->
+        {{#if userEvent}}
+          <section class="clearfix">
+              <div class="alert alert-success col-md-4" role="alert" style="margin: 14px auto; display: table;">
+                  <span class="fa fa-check"></span>
+                  <span class="sr-only">Éxito:</span>
+                  <span style="padding-left:5px;">{{userMessage}}</span>
+              </div>
+          </section>
+        {{/if}}
+        <table style="margin-top:20px;border-color: gray;" class="table table-hover table-striped table-order">
+            <colgroup>
+                <col class="col-xs-3">
+                <col class="col-xs-2">
+                <col class="col-xs-2">
+                <col class="col-xs-3">
+                <col class="col-xs-2 col-md-2 col-lg-1">
+            </colgroup>
+            <thead>
+            <tr>
+                <th >Nombre de usuario</th>
+                <th>Usuario</th>
+                <th>Correo electrónico</th>
+                <th>Rol/Permisos</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+              {{#each user in filteredContent itemController="users.itemUser"}}
+                <tr>
+                  <td>
+
+                      <div class="checkbox">
+                          <label>{{input type="checkbox" class="form-edit" checked=user.isChecked}} <span>{{user.name}}</span></label>
+                      </div>
+                  </td>
+                  <td>{{user.username}}</td>
+                  <td>{{user.email}}</td>
+                  <td>{{user.role}}</td>
+                  <td>
+                      <button {{action 'deleteUserAction'}} class="btn btn-default settings pull-right delete-row" type="button"><i class="fa fa-trash"></i></button>
+                      <button {{action 'editUserAction'}} type="button" class="btn btn-default settings pull-right right-mini-space edit-row" type="button"><i class="fa fa-cog"></i></button>
+                  </td>
+                </tr>
+                {{#if user.isEditingUser}}
+                  <tr class="edit-user-tr">
+                      <td class="user-edit" colspan="5" style="padding:0;background-color:#fff;">
+                          <div class="sub-cat-editer" style="border: 2px solid #dedede;padding: 20px;">
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      {{input value=user.name type="text" class="form-control2 value-add bottom-buffer" placeholder="Nombre"}}
+                                      <div class="vertical-buffer">
+                                        {{select-2 content=rolItems style="max-width:none;text-align:left;" class="form-control" value=user.selectedUserRol placeholder="Seleccionar Rol" allowClear=true}}
+                                      </div>
+                                  </div>
+                                  <div class="col-sm-6">
+                                    {{email-validate valueBinding="user.email" type="email" class="form-control2 value-add bottom-buffer" placeholder="Correo Electrónico"}}
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <button {{action 'deleteUserAction'}}type="button" class="btn btn-simple delete-edit-user"> Eliminar Usuario</button>
+                                  </div>
+                                  <div class="col-sm-3">
+                                      <button {{action 'cancelUserAction'}} type="button" class="btn btn-simple cancel-edit-user">Cancelar edición</button>
+                                  </div>
+                                  <div class="col-sm-3">
+                                      <button {{action 'saveUserAction'}} {{bind-attr disabled=user.isEdited}} type="button" class="btn btn-simple pull-right save-edit-user"> Guardar cambios</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </td>
+                  </tr>
+                {{/if}}
+              {{/each}}
+
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5"></td>
+            </tr>
+            </tfoot>
+        </table>
+    </main>
+</div>

@@ -1,0 +1,41 @@
+.user-panel{
+    background: $gray-darker; position: relative; height: 75px; z-index: 200; 
+    .user-header{
+         width: 100%; height: 100%; display: block; margin:0;
+        .username{ @include fontsize(1.8);}
+        .userrole{ @include fontsize(1.4); font-weight: 400}
+        a{color:$brand-text-inverted;}
+        .dropdown-menu{
+            background-color: $black; padding: 0; min-width: $user-panel-width; border-radius: 0px; margin:0; border:none; font-family: $font-stack; 
+            &>li>a{font-weight: 300; @include fontsize(1.8); padding: 15px 20px; border:none}
+            &>li:before{border-bottom: 1px solid lighten($black, 40%); height: 1px; overflow: hidden; content: ""; display:block; margin:0 20px; border-top:none}
+            &>li .fa{margin-right: 10px}
+        }
+    }
+    .user-atts{display: inline-block; @extend .center-top; margin-left: 25px;        
+    }
+    .user-dropdown{
+        padding-top: 0; padding-bottom: 0; @extend .center-top; width: 100%; display: block; height: 100%;
+        &>.fa{position: absolute; @extend .center-top; right:15px}
+    }
+    &:hover { cursor: pointer;}
+}
+.user-avatar{
+    width: 52px; height: 52px; background-color: $white; display: inline-block; right: 35px; position: absolute; @extend .center-top;
+    &:before{position:absolute; font-family: FontAwesome; top:50%; left:50%; content: "\f007"; color:lighten($black, 90%); font-size: 35px; margin-left: -14px; margin-top: -25px; }
+}
+
+@media (min-width: $screen-sm-min) {    
+    .user-panel{
+        position: absolute; top: 0; right: 0; min-width:($user-panel-width+100) ; height: 85px;
+        .user-header{ 
+            //@extend .center-top; 
+            .dropdown-menu{
+                background-color: $black; padding: 0; min-width:($user-panel-width+100) ; border-radius: 0px; margin:0; border:none; font-family: $font-stack; 
+                &>li>a{font-weight: 300; @include fontsize(1.8); padding: 15px 20px; border:none}
+                &>li:before{border-bottom: 1px solid lighten($black, 40%); height: 1px; overflow: hidden; content: ""; display:block; margin:0 20px; border-top:none}
+                 &>li .fa{margin-right: 10px}
+            }
+        }        
+    }
+}

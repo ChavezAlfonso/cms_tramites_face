@@ -1,0 +1,178 @@
+//== botones
+.btn{
+     padding-right: 35px; padding-left: 35px; overflow:hidden; font-weight:600; border:0;
+    &.btn-lg{padding-top: 6px; padding-bottom: 6px;}
+    &.btn-lg:before{margin-top: -24px;}
+}
+
+.btn-default{
+    border: 1px solid darken($gray-ultralight, 4%); background-color:lighten($gray-ultralight, 2%);  padding:15px 25px; @include block-shadow(); color:$brand-text;
+    .fa { margin-right: 15px;}
+
+    &:hover {
+        background-color:darken($gray-ultralight, 25%); color:$white; border-color:transparent;
+    }
+    &.icon {
+        padding: 15px 12px;
+       .fa { margin-right: 0; font-size:26px !important;}
+    }
+    &.settings {
+        padding: 4px 6px 2px; text-align: center;
+        .fa { margin-right: 0; font-size:22px;}
+    }
+}
+
+.btn-simple {
+    border: 1px solid darken($gray-ultralight, 10%); background-color:lighten($gray-lighter, 5%);  padding:7px 20px;  color:$brand-text; font-weight: 300;
+    .fa { margin-right: 15px;}
+
+    &.btn-lg {
+        padding-top: 14px; padding-bottom: 14px; @include fontsize(1.4);
+    }
+
+    &.active {
+        border-color: #66afe9; outline: 0; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    }
+
+    &:hover {
+        background-color:darken($gray-ultralight, 25%); color:$white; border-color:transparent;
+    }
+    &.icon {
+        padding: 15px 12px;
+       .fa { margin-right: 0; font-size:26px !important;}
+    }
+}
+
+.btn-simple-icon {
+    border: 1px solid darken($gray-ultralight, 10%); background-color:lighten($gray-lighter, 5%);  padding:7px 11px;  color:$brand-text; font-weight: 300;
+    &:hover {
+        background-color:darken($gray-ultralight, 25%); color:$white; border-color:transparent;
+    }
+}
+
+
+
+.btn-action {
+    padding:15px 45px; border-radius:0px; font-weight: 300; @include fontsize(1.8); color:$white;
+    background-color: #C0C0C0;
+    &.publish {
+        background-color: $green-light; color:$white;  padding:15px 55px;
+        &:hover {background-color: darken($green-light, 15%); color:$white;}
+    }
+
+}
+
+
+
+.btn-add {
+    background-color:$blue-gray; border-radius:0; padding: 18px; color:$white; box-shadow: inset 0px 3px 13px 0px rgba(0,0,0,0.11); @include fontsize(1.6);
+    &:hover {background-color:darken($blue-gray, 10%); color:$white;  }
+}
+
+.button-edit-group {
+    @include clearfix(); margin-top: -20px; margin-bottom: -20px; width:100%; margin-right: -23px; position:absolute; top:0; bottom:0; right:0;
+    .btn {
+        float: left; border-radius:0; height:100%; width:33%; text-align: center; min-height:80px; padding:0; font-weight:300; color:$white; margin:0; text-transform: capitalize;
+        &.erase {
+            background-color: darken($btn-caution, 15%);
+            &:hover { background-color: darken($btn-caution, 25%); }
+        }
+        &.cancel {
+            background-color: lighten($btn-cancel, 15%);
+            &:hover { background-color: $btn-cancel; }
+        }
+        &.save {
+            background-color: $green-light;
+            &:hover { background-color: darken($green-light, 15%); }
+        }
+    }
+}
+
+.btn-success{
+    background-color: $btn-accept; border-color: darken($btn-accept, 20%);
+    &:hover{ background-color: darken($btn-accept, 10%)}
+}
+
+.btn-publish {
+    background-color: $green-light; color:$white;
+    &:hover {background-color: darken($green-light, 15%); color:$white;}
+}
+
+//.btn-primary{
+//    background-color: $btn-save; border-color: darken($btn-save, 20%);
+//    &:hover{ background-color: darken($btn-save, 10%)}
+//}
+.btn-warning{
+    background-color: $btn-warning; border-color: darken($btn-warning, 20%); color:$black;
+    &:hover{ background-color: darken($btn-warning, 10%)}
+}
+.btn-cancel{
+    background-color: $btn-cancel; border-color: darken($btn-cancel, 20%); color:$white;
+    &:hover{color:$white; background-color: darken($btn-cancel, 10%)}
+}
+
+.btn-danger{
+    background-color: $btn-caution; border-color: darken($btn-caution, 20%);
+    &:hover{color:$white; background-color: darken($btn-caution, 10%)}
+}
+.btn-preview{
+    background-color: $btn-preview; border-color: darken($btn-preview, 20%); color:$white;
+    &:hover{color:$white; background-color: lighten($btn-preview, 10%)}
+}
+.btn-transparent{
+   padding: 3px;  border: none; background: transparent;
+}
+
+.btn-unstyled {
+    border: none; background: transparent; padding: 0px;
+}
+
+.btn-link{color:$link-blue}
+
+.pencil-edit{padding:4px 8px; @include box-shadow(0 0 2px $black); position:absolute; right: 10px; top:10px}
+
+
+
+.search-submit{
+    color: darken($gray-light, 10%); background-color:$gray-lighter; border:1px solid lighten($gray-light, 20%); border-radius:3px; position: absolute;  top:9px; right:10px; line-height:10px;
+    .fa-search { font-size:10px;}
+
+}
+
+.btn-publish {
+    background-color: $green-light; margin:10px auto; border-radius:0; border-bottom-right-radius:0; padding: 20px; font-size:20px; font-weight: 300; min-width: 100%; float:none;
+    &:hover{
+        background-color: darken($green-light, 15%); color:$white;
+    }
+}
+
+.btn-caret {
+    padding: 2px 8px 4px; line-height: 10px; border: 1px solid darken($gray-lighter, 20%); margin:0 4px; color:$gray;
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(top,  #ffffff 0%, #dce2e5 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#dce2e5)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #ffffff 0%,#dce2e5 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #ffffff 0%,#dce2e5 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #ffffff 0%,#dce2e5 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #ffffff 0%,#dce2e5 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#dce2e5',GradientType=0 ); /* IE6-9 */
+    -webkit-box-shadow: 0px 1px 3px 0px rgba(50, 50, 50, 0.21);
+    -moz-box-shadow:    0px 1px 3px 0px rgba(50, 50, 50, 0.21);
+    box-shadow:         0px 1px 3px 0px rgba(50, 50, 50, 0.21);
+}
+
+.cancel-link {
+    color:$red; text-decoration: underline;
+    &:hover {color:darken($red, 10%); text-decoration: none;}
+}
+.save-link {
+    text-decoration: underline;
+    &:hover {color:darken($blue, 10%); text-decoration: none;}
+}
+
+
+@media (min-width: $screen-sm-min) {
+    .btn-publish {
+        background-color: $green-light; margin:0; border-radius:0; border-bottom-right-radius:5px; padding: 20px 50px; font-size:24px; font-weight: 300; min-width: 330px;  float: right;
+    }
+}

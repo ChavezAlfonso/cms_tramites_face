@@ -1,0 +1,62 @@
+//== Colors
+$brand-text: #8e8e8e;
+$gray-blue:#f3f4f6;
+
+$black:         #000;
+$gray-ultradark:lighten(#000, 10%);
+$gray-darker:   lighten(#000, 15%);  
+$gray-dark:     lighten(#000, 20%);   
+/*$gray:          lighten(#000, 30%); */
+$gray:          #444444;
+$gray-light:    lighten(#000, 60%);   
+$gray-lighter:  lighten(#000, 93.5%);
+$gray-light-bg: #e6e6e6;
+$gray-ultralight:  lighten(#000, 97%); 
+$white:         #fff;
+
+$blue:          #2649d0;
+$blue-sea:      #1a79a7;
+$blue-sky:      #00aeef; 
+$blue-pastel:   #d9f0fc;
+$green:         #58b956;
+$green-dark: 	#43b47c;
+$green-fluor:   #aeff21;
+$green-light:   #94dd81;
+$yellow:        #f3af43;
+$red:           #cb2a23;
+$blue-gray:		#A3C2DB;
+
+$link-blue: #5aa3e8;
+$brand-text-inverted: lighten($gray-light, 30%);
+
+//== colores botones
+
+$btn-accept: $green;
+$btn-save: #29ADE0;
+$btn-preview: #242524;
+$btn-warning: #fee161;
+$btn-caution: #CB2E35;
+$btn-cancel: #58585b;
+$btn-default: #BBBDC0;
+
+$brand-success: $green;
+
+$accept-color: $btn-accept;
+$save-color: $btn-save;
+$preview-color: $btn-preview;
+$warning-color: $btn-warning;
+$caution-color: $btn-caution;
+$cancel-color: $btn-cancel;
+$default-color: $btn-default;
+
+//== Fonts
+
+$font-stack: 'Open Sans', sans-serif;
+$montserrat: 'Montserrat', sans-serif;
+$user-panel-width: 268px;
+
+//==  Screen sizes
+
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;

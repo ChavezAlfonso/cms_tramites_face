@@ -1,0 +1,30 @@
+//== popovers
+
+.popover{
+    min-width: 300px; max-width: 450px;
+}
+
+.popover-title {
+    background: rgb(255,255,255); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(226,226,226,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(226,226,226,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(226,226,226,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(226,226,226,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(226,226,226,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(226,226,226,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e2e2e2',GradientType=0 ); /* IE6-9 */
+    position:relative;
+    text-align: center;
+    color: $gray-light;
+}
+
+.cancel{
+    color:$red; text-transform: uppercase; border: 0; background: transparent; padding: 6px 0; margin-top: 2px;
+}
+
+.popover-content{
+    background-image: url("../img/pattern.png"); overflow-y: hidden; 
+}
+.add-tag-group{position:relative;}
+
+.add-tag{position: absolute; right: 10px; top: 8px; background: transparent; border:none; padding:0}

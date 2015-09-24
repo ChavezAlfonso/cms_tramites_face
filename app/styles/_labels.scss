@@ -1,0 +1,9 @@
+//== avisos
+
+.label-block{
+    display:block; font-size:100%; padding: 15px 0; font-weight: normal; border-radius: 0; border:2px solid transparent; text-transform:uppercase;
+    &.label-success{@extend .btn-success; background-color: rgba($btn-accept, 0.7);}
+    &.label-warning{@extend .btn-warning; background-color: rgba($btn-warning, 0.7)}
+    &.label-danger{@extend .btn-danger; background-color: rgba($btn-caution, 0.7)}
+}
+
